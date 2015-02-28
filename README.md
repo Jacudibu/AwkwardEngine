@@ -1,4 +1,4 @@
 # AwkwardEngine
-An Awkward Game Engine (C++)
+An Awkward C++ Game Engine
 
-AE utilizes SDL to display sprites, measure time, query user Input and to play Sound. Use at your own Risk. May include awkwardness.
+AwkwardEngine (formerly AE) utilizes SDL to display sprites, measure time, query user Input and to play Sound. Use at your own Risk. May include awkwardness.
