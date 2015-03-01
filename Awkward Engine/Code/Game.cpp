@@ -161,6 +161,7 @@ int main(int argc, char* args[])
 		SDL_RendererFlip flipType = SDL_FLIP_NONE;
 
 		float mousePointerStep = 0.0f;
+		Input::displayMouseCursor(false);
 
 		// Variables for FPS
 		std::stringstream timeText;

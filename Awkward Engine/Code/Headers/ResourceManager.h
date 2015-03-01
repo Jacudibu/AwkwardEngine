@@ -13,14 +13,15 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
+#include "Texture.h"
 
 namespace ResourceManager
 {
 	// Returns a pointer to the loaded texture.
-	SDL_Texture* loadTextureFromFile(std::string path, SDL_Renderer* renderer, bool useColorKey = false);
+	Texture* loadTextureFromFile(std::string path, SDL_Renderer* renderer, bool useColorKey = false);
 
 	// Returns a pointer to the loaded texture.
-	SDL_Texture* loadTextureFromText(std::string text, SDL_Renderer* renderer, SDL_Color textColor, TTF_Font* font);
+	Texture* loadTextureFromText(std::string text, SDL_Renderer* renderer, SDL_Color textColor, TTF_Font* font);
 
 	// Returns a pointer to the loaded sound.
 	Mix_Chunk* loadSoundFromFile(std::string path);

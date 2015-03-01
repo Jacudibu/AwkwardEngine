@@ -14,7 +14,6 @@ TextRenderer::TextRenderer(std::string newText, RenderLayer* layer, SDL_Color co
 TextRenderer::~TextRenderer()
 {
 	Layer->removeRenderer(this);
-
 	ResourceManager::unloadTexture(texture->path);
 }
 
@@ -37,9 +36,7 @@ void TextRenderer::draw()
 
 void TextRenderer::generate()
 {
-	texture = new Texture();
-	texture->loadTextureFromRenderedText(text, Color, font, Layer->renderer);
-
+	texture = ResourceManager::loadTextureFromText(text, Layer->renderer, Color, font);
 	Offset = { texture->getWidth() / 2.0f, texture->getHeight() / 2.0f, 0.0f };
 }
 

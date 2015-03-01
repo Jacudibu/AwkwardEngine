@@ -4,7 +4,7 @@ namespace ResourceManager
 {
 	namespace // These are "real" private variables that can only be accessed within this file.
 	{
-		struct TextureWithCount { SDL_Texture* texture; int counter; };
+		struct TextureWithCount { Texture* texture; int counter; };
 		struct SoundWithCount { Mix_Chunk* sound; int counter; };
 		struct MusicWithCount { Mix_Music* music; int counter; };
 
@@ -13,7 +13,7 @@ namespace ResourceManager
 		std::map <std::string, MusicWithCount>   music;
 	}
 
-	SDL_Texture* loadTextureFromFile(std::string path, SDL_Renderer* renderer, bool useColorKey)
+	Texture* loadTextureFromFile(std::string path, SDL_Renderer* renderer, bool useColorKey)
 	{
 		if (textures.find(path) != textures.end())
 		{
@@ -25,32 +25,7 @@ namespace ResourceManager
 		{
 			// Texture is not loaded yet, so let's load it.
 			TextureWithCount newTexture;
-
-			// Load image at specified path into a surface
-			SDL_Surface* loadedSurface = IMG_Load(path.c_str());
-			if (loadedSurface == nullptr)
-			{
-				printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
-				return nullptr;
-			}
-
-			// Color key image
-			if (useColorKey)
-			{
-				SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0xFF));
-			}
-
-			// Create texture from surface pixels
-			newTexture.texture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
-			if (newTexture.texture == nullptr)
-			{
-				printf("Unable to create texture from %s!SDL Error : %s\n", path.c_str(), SDL_GetError());
-				SDL_FreeSurface(loadedSurface); // We do that here because afterwards we will return
-				return nullptr;
-			}
-
-			// Get rid of loaded surface
-			SDL_FreeSurface(loadedSurface);
+			newTexture.texture = new Texture(path, renderer, useColorKey);
 
 			// Add Texture into our map
 			newTexture.counter = 1;
@@ -59,7 +34,7 @@ namespace ResourceManager
 			return newTexture.texture;
 		}
 	}
-	SDL_Texture* loadTextureFromText(std::string text, SDL_Renderer* renderer, SDL_Color textColor, TTF_Font* font)
+	Texture* loadTextureFromText(std::string text, SDL_Renderer* renderer, SDL_Color textColor, TTF_Font* font)
 	{
 		if (textures.find(text) != textures.end())
 		{
@@ -71,26 +46,7 @@ namespace ResourceManager
 		{
 			// Texture is not loaded yet, so let's load it.
 			TextureWithCount newTexture;
-
-			// Render text surface
-			SDL_Surface* textSurface = TTF_RenderText_Solid(font, text.c_str(), textColor);
-			if (textSurface == nullptr)
-			{
-				printf("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
-				return nullptr;
-			}
-
-			// Create texture from surface pixels
-			newTexture.texture = SDL_CreateTextureFromSurface(renderer, textSurface);
-			if (newTexture.texture == nullptr)
-			{
-				printf("Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError());
-				SDL_FreeSurface(textSurface);
-				return nullptr;
-			}
-
-			// Get rid of old surface
-			SDL_FreeSurface(textSurface);
+			newTexture.texture = new Texture(text, renderer, textColor, font);
 
 		    // Add Texture into our map
 			newTexture.counter = 1;
@@ -161,7 +117,7 @@ namespace ResourceManager
 			textures.find(path)->second.counter--;
 			if (textures.find(path)->second.counter <= 0)
 			{
-				SDL_DestroyTexture(textures.find(path)->second.texture);
+				delete(textures.find(path)->second.texture);
 				textures.erase(path);
 			}
 		}

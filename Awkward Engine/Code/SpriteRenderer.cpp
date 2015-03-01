@@ -6,7 +6,7 @@ SpriteRenderer::SpriteRenderer(std::string path, RenderLayer* layer, int rows, i
 	Layer = layer;
 	Layer->addRenderer(this);
 
-	texture = new Texture(path, Layer->renderer);
+	texture = ResourceManager::loadTextureFromFile(path, Layer->renderer);
 
 	spriteRows = rows;
 	spriteColumns = columns;
@@ -22,8 +22,6 @@ SpriteRenderer::~SpriteRenderer()
 	Layer->removeRenderer(this);
 
 	ResourceManager::unloadTexture(texture->path);
-
-
 	delete (spriteClips);
 }
 

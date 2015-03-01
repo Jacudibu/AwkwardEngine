@@ -10,16 +10,17 @@ class Texture
 {
 public:
 	Texture();
-	Texture(std::string path, SDL_Renderer* renderer);
+	Texture(std::string path, SDL_Renderer* renderer, bool useColorKey = false);
+	Texture(std::string textureText, SDL_Renderer* renderer, SDL_Color textColor, TTF_Font* font);
 	~Texture();
 
 	std::string path;
 
 	// Loads image at specified path
-	void loadTextureFromFile(std::string path, SDL_Renderer* renderer);
+	void loadTextureFromFile(std::string path, SDL_Renderer* renderer, bool useColorKey = false);
 
 	// Creates image from String
-	void loadTextureFromRenderedText(std::string textureText, SDL_Color textColor, TTF_Font* font, SDL_Renderer* renderer);
+	void loadTextureFromRenderedText(std::string textureText, SDL_Renderer* renderer, SDL_Color textColor, TTF_Font* font);
 
 	// Deallocates texture
 	void free();
