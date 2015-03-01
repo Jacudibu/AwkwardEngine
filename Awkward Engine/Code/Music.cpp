@@ -1,6 +1,7 @@
 #include "Headers\Music.h"
 #include "Headers\ResourceManager.h"
 
+
 Music::Music()
 {
 	music = nullptr;

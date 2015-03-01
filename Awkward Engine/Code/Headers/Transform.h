@@ -20,7 +20,8 @@ public:
 
 	// Moves the Position by given offset.
 	void Translate(Vector3 offset);
-	// Rotations the Object by given angle.
+
+	// Rotates the Object by given angle.
 	void Rotate(float angle);
 
 	// Returns a list with points to all Children of the Transform.
@@ -32,8 +33,10 @@ public:
 
 	// Sets the Transform's Parent. Passing nullptr takes the Transform up to the highest Level.
 	void SetParent(Transform* p);
-
+	
+	// Returns the GameObject connected to this Transform.
 	GameObject* getGameObject();
+
 
 
 

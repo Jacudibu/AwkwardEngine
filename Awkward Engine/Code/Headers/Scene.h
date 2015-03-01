@@ -9,7 +9,10 @@ public:
 	// Calls the Update function of every GameObject inside the Scene.
 	void Update();
 
+	// Adds the given GameObject into the Scene.
 	void addGameObject(GameObject* object);
+
+	// Removes the given GameObject from the Scene.
 	void removeGameObject(GameObject* object);
 
 	// Currently not implemented! DERP! //#TODO: CHANGE DIS

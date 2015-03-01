@@ -10,7 +10,9 @@ class Texture
 {
 public:
 	Texture();
+	// Initialize a Texture with a file.
 	Texture(std::string path, SDL_Renderer* renderer, bool useColorKey = false);
+	// Initialize a Texture from text.
 	Texture(std::string textureText, SDL_Renderer* renderer, SDL_Color textColor, TTF_Font* font);
 	~Texture();
 

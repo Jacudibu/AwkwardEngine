@@ -15,15 +15,21 @@ public:
 	~Camera();
 
 	bool enabled = true;
-
 	Transform* transform;
 
+	// Sets the ViewPort of the current Camera. If nullptr, the camera will draw on the whole screen.
 	void setViewPort(SDL_Rect* port);
 
+	// Send a Render() command to every RenderLayer in our list. 
 	void Render();
 
+	// Adds a RenderLayer to our list.
 	void addLayer(RenderLayer* layer);
+
+	// Removes a RenderLayer from our list.
 	void removeLayer(RenderLayer* layer);
+
+	// Set the Window this Camera is attached to.
 	void setWindow(Window* win);
 
 private:

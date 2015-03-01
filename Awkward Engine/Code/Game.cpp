@@ -23,7 +23,6 @@ const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
 Window*  gWindow = nullptr;
-//SDL_Renderer* gRenderer = nullptr;
 TTF_Font* gFont = nullptr;
 
 TextRenderer* gFPSRenderer;
@@ -70,7 +69,7 @@ bool init()
 		return false;
 	}
 
-	gWindow = new Window(SCREEN_WIDTH, SCREEN_HEIGHT, "Awkward Engine Version 0.0.0.0.0.0.0.0.1e", SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	gWindow = new Window(SCREEN_WIDTH, SCREEN_HEIGHT, "Awkward Engine Version 0.0.0.0.0.0.0.0.1e", SDL_RENDERER_ACCELERATED /*| SDL_RENDERER_PRESENTVSYNC*/);
 	cam = new Camera(gWindow, nullptr);
 	renderLayer = new RenderLayer();
 	cam->addLayer(renderLayer);
@@ -110,8 +109,6 @@ bool loadMedia()
 	gFPSRenderer = new TextRenderer("", renderLayer, {0x0, 0x0, 0x0, 0xFF});
 	fpsObject->addComponent(gFPSRenderer);
 	fpsObject->transform->Position = { SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0 };
-
-	printf("%d", mousePointer->GetComponents().size());
 
 	return success;
 }
@@ -229,7 +226,7 @@ int main(int argc, char* args[])
 		}
 	}
 
-	SDL_Delay(1000);
+	//SDL_Delay(1000);
 	// Free resources
 	close();
 

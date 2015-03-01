@@ -49,7 +49,13 @@ public:
 	// Update does nothing.
 	virtual void Update() {}
 
+	// GetID is used to compare types of Components.
+	std::string getID() { return ID; }
+
 private:
+	// Used to compare components for similiarity.
+	std::string ID = "Music";
+
 	Mix_Music* music;
 	std::string path;
 };

@@ -30,10 +30,12 @@ public:
 	   For SDL_Scancode References, go to http://wiki.libsdl.org/SDL_Scancode.
 	 */
 	static bool getKeyDown(SDL_Scancode query);
+
+	// Sets wether the OS-Mousecursor is supposed to be displayed or not.
 	static void displayMouseCursor(bool enabled);
 	
+	// Query Mouse Input here.
 	static MouseInput mouse;
-
 
 private:
 	static const Uint8* currentKeyStates;

@@ -32,8 +32,8 @@ void SpriteRenderer::draw()
 
 	Transform* pos = gameObject->transform->getWorldTransform();
 
-	texture->render((int)pos->Position.x - Offset.x + Layer->camera->transform->Position.x, // X-POS
-					(int)pos->Position.y - Offset.y + Layer->camera->transform->Position.y, // Y-POS
+	texture->render((int)(pos->Position.x - Offset.x + Layer->camera->transform->Position.x), // X-POS
+					(int)(pos->Position.y - Offset.y + Layer->camera->transform->Position.y), // Y-POS
 					Layer->renderer,				 // Renderer
 					spriteClips + (spriteClip - 1),  // Position in SpriteSheet
 					pos->Rotation,                   // Rotation

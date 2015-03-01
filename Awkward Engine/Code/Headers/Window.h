@@ -19,8 +19,13 @@ public:
 	int ScreenHeight;
 	std::string Title;
 
+	// Send the Render command to all Cameras attached to the window.
 	void Render();
+
+	// Adds a Camera to the list.
 	void addCamera(Camera* cam);
+
+	// Removes a Camera from the list.
 	void removeCamera(Camera* cam);
 
 private:

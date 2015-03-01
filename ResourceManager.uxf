@@ -4,15 +4,15 @@
   <element>
     <type>CustomElementImpl</type>
     <coordinates>
-      <x>60</x>
+      <x>50</x>
       <y>210</y>
-      <w>581</w>
+      <w>551</w>
       <h>281</h>
     </coordinates>
     <panel_attributes>&lt;&lt;namespace&gt;&gt;
 ResourceManager
 --
-- TextureWithCount : struct(SDL_Texture*, int)
+- TextureWithCount : struct(Texture*, int)
 - SoundWithCount : struct(Mix_Chunk*, int)
 - MusicWithCount : struct(Mix_Music*, int)
 
@@ -20,8 +20,8 @@ ResourceManager
 - sounds : std::map(string, SoundWithCount)
 - musics : std::map(string, TextureWithCount)
 --
-+ loadTextureFromFile(std::string, SDL_Renderer*) : SDL_Texture* 
-+ loadTextureFromText(std::string, SDL_Renderer*, SDL_Color, TTF_Font*) : SDL_Texture*
++ loadTextureFromFile(std::string, SDL_Renderer*) : Texture* 
++ loadTextureFromText(std::string, SDL_Renderer*, SDL_Color, TTF_Font*) : Texture*
 + loadSoundFromFile(std::string) : Mix_Chunk*
 + loadMusicFromFile(std::string) : Mix_Music*
 + unloadTexture(std::string)

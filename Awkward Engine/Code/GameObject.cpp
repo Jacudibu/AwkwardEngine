@@ -36,25 +36,35 @@ void GameObject::Update()
 	}
 }
 
-std::vector<class T*> GameObject::GetComponents()
+Component* GameObject::getComponent(std::string ID)
 {
-	std::vector<T*> result;
+	for (Component* comp : components)
+	{
+		if (comp->getID().compare(ID) == 0)
+			return comp;
+	}
+
+	return nullptr;
+}
+std::vector<Component*> GameObject::getComponents(std::string ID)
+{
+	std::vector<Component*> result;
 	
 	for (Component* comp : components)
 	{
-		if (typeid(comp) == typeid(T))
-			result.push_back((T*)comp);
+		if (comp->getID().compare(ID) == 0)
+			result.push_back(comp);
 	}
 
 	return result;
 }
-std::vector<class T*> GameObject::GetComponentsInChildren()
+std::vector<Component*> GameObject::getComponentsInChildren(std::string ID)
 {
-	std::vector<T*> result;
+	std::vector<Component*> result;
 	
 	for (Transform* trans : transform->GetChildren())
 	{
-		std::vector<T*> tempVector = trans->getGameObject()->GetComponents();
+		std::vector<Component*> tempVector = trans->getGameObject()->getComponents(ID);
 		result.insert(result.end(), tempVector.begin(), tempVector.end());
 	}
 
