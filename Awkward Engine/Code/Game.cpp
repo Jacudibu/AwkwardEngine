@@ -14,6 +14,7 @@
 #include "Headers/Music.h"
 #include "Headers/Sound.h"
 #include "Headers/SpriteRenderer.h"
+#include "Headers/TextRenderer.h"
 #include "Headers/Camera.h"
 #include "Headers/Window.h"
 
@@ -25,17 +26,18 @@ Window*  gWindow = nullptr;
 //SDL_Renderer* gRenderer = nullptr;
 TTF_Font* gFont = nullptr;
 
-Texture gTextTexture;
+TextRenderer* gFPSRenderer;
 SpriteRenderer* gArrowTexture;
 
 Sound gSound;
 
 RenderLayer* renderLayer;
-GameObject* gameObject;
+GameObject* mousePointer;
 GameObject* arrowObject;
+GameObject* fpsObject;
 Camera* cam;
 
-SpriteRenderer* spriteRenderer;
+SpriteRenderer* cursorRenderer;
 
 bool init()
 {
@@ -72,24 +74,6 @@ bool init()
 	cam = new Camera(gWindow, nullptr);
 	renderLayer = new RenderLayer();
 	cam->addLayer(renderLayer);
-	/*
-	// Create Window
-	gWindow = SDL_CreateWindow("Awkward Engine Version 0.0.0.0.0.0.0.0.1d", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-	if (gWindow == nullptr)
-	{
-		printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
-		return false;
-	}
-
-	// Create renderer for window
-	gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (gRenderer == nullptr)
-	{
-		printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
-		return false;
-	}
-	*/
-
 
 	return true;
 }
@@ -106,22 +90,28 @@ bool loadMedia()
 		printf("Failed to load font! SDL_ttf Error: %s\n", TTF_GetError());
 		success = false;
 	}
+	TextRenderer::font = gFont;
 
-
-	gArrowTexture = new SpriteRenderer("resources/alphaArrow.png", renderLayer);
 
 	gSound.loadSoundFromFile("resources/testsounds/low.wav");
 	gSound.setVolume(10);
 
-	gameObject = new GameObject();
+	mousePointer = new GameObject();
 	arrowObject = new GameObject();
+	fpsObject = new GameObject();
 
-	spriteRenderer = new SpriteRenderer("resources/sprites.png", renderLayer, 2, 2, 3);
-	gameObject->addComponent(spriteRenderer);
+	cursorRenderer = new SpriteRenderer("resources/cursor.png", renderLayer, 1, 2, 1);
+	mousePointer->addComponent(cursorRenderer);
+	
+	gArrowTexture = new SpriteRenderer("resources/alphaArrow.png", renderLayer);
 	arrowObject->addComponent(gArrowTexture);
 	arrowObject->transform->Position = { SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0 };
 
-	printf("%d", gameObject->GetComponents().size());
+	gFPSRenderer = new TextRenderer("", renderLayer, {0x0, 0x0, 0x0, 0xFF});
+	fpsObject->addComponent(gFPSRenderer);
+	fpsObject->transform->Position = { SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0 };
+
+	printf("%d", mousePointer->GetComponents().size());
 
 	return success;
 }
@@ -130,7 +120,7 @@ void close()
 {
 	// Free loaded image
 	gArrowTexture->~SpriteRenderer();
-	gTextTexture.free();
+	gFPSRenderer->~TextRenderer();
 	gSound.free();
 
 	// Free global font
@@ -167,8 +157,10 @@ int main(int argc, char* args[])
 		bool quit = false;
 		SDL_Event e;
 
-		double degrees = 0;
+		float degrees = 0;
 		SDL_RendererFlip flipType = SDL_FLIP_NONE;
+
+		float mousePointerStep = 0.0f;
 
 		// Variables for FPS
 		std::stringstream timeText;
@@ -212,17 +204,21 @@ int main(int argc, char* args[])
 			if (Input::getKeyDown(SDL_SCANCODE_LEFT))
 				cam->transform->Position.x++;
 
-			gameObject->transform->Position = { (float)Input::mouse.posX, (float)Input::mouse.posY, 0.0f };
+			mousePointer->transform->Position = { (float)Input::mouse.posX, (float)Input::mouse.posY, 0.0f };
+			mousePointer->transform->Position -= cam->transform->Position;
+
+			mousePointerStep += Time::getDeltaTime();
+			cursorRenderer->setCurrentClip(((int)mousePointerStep % 2) + 1);
 
 			// Set text to be rendered
 			timeText.str("");
 			timeText << "FPS: " << Time::getFPS();
 
 			// Render Text
-			gTextTexture.loadTextureFromRenderedText(timeText.str(), { 0, 0, 0, 255 }, gFont, gWindow->renderer);
+			gFPSRenderer->setText(timeText.str());
 
 			// Render current frame
-			gTextTexture.render((SCREEN_WIDTH - gTextTexture.getWidth()) / 2, (SCREEN_HEIGHT - gTextTexture.getHeight()) / 2, gWindow->renderer, nullptr, degrees, nullptr, flipType);
+			fpsObject->transform->Rotation = degrees;
 			arrowObject->transform->Rotation = degrees;
 
 			gWindow->Render();

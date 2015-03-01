@@ -125,7 +125,7 @@ m2=1</panel_attributes>
       <x>590</x>
       <y>620</y>
       <w>181</w>
-      <h>191</h>
+      <h>171</h>
     </coordinates>
     <panel_attributes>SpriteRenderer
 --
@@ -135,7 +135,6 @@ m2=1</panel_attributes>
 - spriteColumns : int
 - spriteRows : int
 - spriteClips : SDL_Rect*
-- path : string
 --
 + setCurrentClip(int)
 - calculateSpriteClips(void)</panel_attributes>
@@ -189,7 +188,7 @@ drawRectangle(0,0,onGrid(width),onGrid(height));</custom_code>
 + Font : TTF_Font
 + Size : int
 --
-+ generate(String)</panel_attributes>
+- generate(String)</panel_attributes>
     <additional_attributes/>
     <custom_code>setAutoresize(20,15,5);
 
@@ -245,11 +244,13 @@ m2=1</panel_attributes>
       <x>590</x>
       <y>420</y>
       <w>171</w>
-      <h>91</h>
+      <h>121</h>
     </coordinates>
     <panel_attributes>/*Renderer*/
 --
 + Offset : Vector3
++ flip : SDL_RenderFlip
+# Layer : RenderLayer*
 --
 + draw(void)
 + setLayer(RenderLayer)</panel_attributes>

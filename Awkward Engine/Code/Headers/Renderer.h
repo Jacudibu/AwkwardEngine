@@ -15,6 +15,7 @@ public:
 	void Update();
 	void setLayer(RenderLayer* layer);
 
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
 
 protected:
 	RenderLayer* Layer;

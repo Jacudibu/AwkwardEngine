@@ -22,6 +22,7 @@
     <ClCompile Include="Code\Scene.cpp" />
     <ClCompile Include="Code\Sound.cpp" />
     <ClCompile Include="Code\SpriteRenderer.cpp" />
+    <ClCompile Include="Code\TextRenderer.cpp" />
     <ClCompile Include="Code\Texture.cpp" />
     <ClCompile Include="Code\Time.cpp" />
     <ClCompile Include="Code\Transform.cpp" />
@@ -41,6 +42,7 @@
     <ClInclude Include="Code\Headers\Scene.h" />
     <ClInclude Include="Code\Headers\Sound.h" />
     <ClInclude Include="Code\Headers\SpriteRenderer.h" />
+    <ClInclude Include="Code\Headers\TextRenderer.h" />
     <ClInclude Include="Code\Headers\Texture.h" />
     <ClInclude Include="Code\Headers\Time.h" />
     <ClInclude Include="Code\Headers\Transform.h" />

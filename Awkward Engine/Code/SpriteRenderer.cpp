@@ -40,7 +40,7 @@ void SpriteRenderer::draw()
 					spriteClips + (spriteClip - 1),  // Position in SpriteSheet
 					pos->Rotation,                   // Rotation
 					nullptr,                         // Rotation Anchor (Null => Center)
-					SDL_FLIP_NONE                    // SDL FLIP Tags
+					flip                             // SDL FLIP Tags
 				   );
 }
 
@@ -55,12 +55,12 @@ void SpriteRenderer::calculateSpriteClips()
 	delete(spriteClips);
 	spriteClips = new SDL_Rect[spriteRows * spriteColumns];
 
-	clipHeight = texture->getHeight() / spriteColumns;
+	clipHeight = texture->getHeight() / spriteRows;
 	clipWidth  = texture->getWidth()  / spriteColumns;
 
-	for (int y = 0; y < spriteColumns; y++)
+	for (int y = 0; y < spriteRows; y++)
 	{
-		for (int x = 0; x < spriteRows; x++)
+		for (int x = 0; x < spriteColumns; x++)
 		{
 			spriteClips[x + y * spriteColumns].x = x*clipWidth;
 			spriteClips[x + y * spriteColumns].y = y*clipHeight;

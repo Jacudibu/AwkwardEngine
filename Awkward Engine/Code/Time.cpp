@@ -23,6 +23,10 @@ void Time::Update()
 	_lastTime = _time;
 	_time += _deltaTime;
 	
+	_unscaledDeltaTime /= 1000.0f;
+	_deltaTime /= 1000.0f;
+
+
 	// FPS Stuff
 	_frameCount++;
 	if ((int)_unscaledTime / 1000 > (int)_unscaledLastTime / 1000)
