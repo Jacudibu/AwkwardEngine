@@ -13,6 +13,7 @@ public:
 	bool enabled = true;
 	int layer;
 	SDL_Renderer* renderer;
+	Camera* camera;
 
 	void Render();
 	void addRenderer(Renderer* object);
@@ -21,5 +22,4 @@ public:
 
 private:
 	std::list<Renderer*> renderList;
-	Camera* camera;
 };

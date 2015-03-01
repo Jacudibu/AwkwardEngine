@@ -33,6 +33,7 @@ Sound gSound;
 RenderLayer* renderLayer;
 GameObject* gameObject;
 GameObject* arrowObject;
+Camera* cam;
 
 SpriteRenderer* spriteRenderer;
 
@@ -68,7 +69,7 @@ bool init()
 	}
 
 	gWindow = new Window(SCREEN_WIDTH, SCREEN_HEIGHT, "Awkward Engine Version 0.0.0.0.0.0.0.0.1e", SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	Camera* cam = new Camera(gWindow, nullptr);
+	cam = new Camera(gWindow, nullptr);
 	renderLayer = new RenderLayer();
 	cam->addLayer(renderLayer);
 	/*
@@ -202,7 +203,15 @@ int main(int argc, char* args[])
 				flipType = SDL_FLIP_VERTICAL;
 			if (Input::getKeyDown(SDL_SCANCODE_U))
 				gSound.Play();
-			
+			if (Input::getKeyDown(SDL_SCANCODE_DOWN))
+				cam->transform->Position.y--;
+			if (Input::getKeyDown(SDL_SCANCODE_UP))
+				cam->transform->Position.y++;
+			if (Input::getKeyDown(SDL_SCANCODE_RIGHT))
+				cam->transform->Position.x--;
+			if (Input::getKeyDown(SDL_SCANCODE_LEFT))
+				cam->transform->Position.x++;
+
 			gameObject->transform->Position = { (float)Input::mouse.posX, (float)Input::mouse.posY, 0.0f };
 
 			// Set text to be rendered
