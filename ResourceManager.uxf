@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>CustomElementImpl</type>
+    <coordinates>
+      <x>60</x>
+      <y>210</y>
+      <w>581</w>
+      <h>281</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;namespace&gt;&gt;
+ResourceManager
+--
+- TextureWithCount : struct(SDL_Texture*, int)
+- SoundWithCount : struct(Mix_Chunk*, int)
+- MusicWithCount : struct(Mix_Music*, int)
+
+- textures : std::map(string, TextureWithCount)
+- sounds : std::map(string, SoundWithCount)
+- musics : std::map(string, TextureWithCount)
+--
++ loadTextureFromFile(std::string, SDL_Renderer*) : SDL_Texture* 
++ loadTextureFromText(std::string, SDL_Renderer*, SDL_Color, TTF_Font*) : SDL_Texture*
++ loadSoundFromFile(std::string) : Mix_Chunk*
++ loadMusicFromFile(std::string) : Mix_Music*
++ unloadTexture(std::string)
++ unloadSound(std::string)
++ unloadMusic(std::string)</panel_attributes>
+    <additional_attributes/>
+    <custom_code>setAutoresize(20,15,5);
+
+int y=textHeight();
+
+boolean center = true;
+for(int i = 0; i &lt; textlines.size(); i++) {
+	String textline = textlines.get(i);
+
+	// Lets format some special characteres.
+	textline = textline.replaceAll("&gt;&gt;", "»");
+	textline = textline.replaceAll("&lt;&lt;", "«");
+
+	// If we entered --, draw a line and set centered to false.
+	if(textline.equals("--")) {
+		drawLineHorizontal((int) (y-textHeight()*0.7));
+		center = false;
+		if (!isManualResized()) height -= (int) (textHeight()*0.75);
+		y += textHeight()*0.3;
+	}
+	
+	// If the line begins with static, we underline the line.
+	else if (textline.split(" ", 2)[0].equals("static"))
+	{
+		if (center) y+= printCenter("_" + textline.split(" ", 2)[1] + "_",y);
+		else y += printLeft("_" + textline.split(" ", 2)[1] + "_",y);
+	}
+	// Default: print text normally
+	else {
+		if (center) y += printCenter(textline,y); 
+		else y += printLeft(textline,y);
+	}
+}
+
+drawRectangle(0,0,onGrid(width),onGrid(height));</custom_code>
+  </element>
+</diagram>

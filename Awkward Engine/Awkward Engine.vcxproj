@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Code\Camera.cpp" />
+    <ClCompile Include="Code\Game.cpp" />
+    <ClCompile Include="Code\GameObject.cpp" />
+    <ClCompile Include="Code\Input.cpp" />
+    <ClCompile Include="Code\Music.cpp" />
+    <ClCompile Include="Code\Renderer.cpp" />
+    <ClCompile Include="Code\RenderLayer.cpp" />
+    <ClCompile Include="Code\ResourceManager.cpp" />
+    <ClCompile Include="Code\Scene.cpp" />
+    <ClCompile Include="Code\Sound.cpp" />
+    <ClCompile Include="Code\SpriteRenderer.cpp" />
+    <ClCompile Include="Code\Texture.cpp" />
+    <ClCompile Include="Code\Time.cpp" />
+    <ClCompile Include="Code\Transform.cpp" />
+    <ClCompile Include="Code\Vector2.cpp" />
+    <ClCompile Include="Code\Vector3.cpp" />
+    <ClCompile Include="Code\Window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Code\Headers\Camera.h" />
+    <ClInclude Include="Code\Headers\Component.h" />
+    <ClInclude Include="Code\Headers\GameObject.h" />
+    <ClInclude Include="Code\Headers\Input.h" />
+    <ClInclude Include="Code\Headers\Music.h" />
+    <ClInclude Include="Code\Headers\Renderer.h" />
+    <ClInclude Include="Code\Headers\RenderLayer.h" />
+    <ClInclude Include="Code\Headers\ResourceManager.h" />
+    <ClInclude Include="Code\Headers\Scene.h" />
+    <ClInclude Include="Code\Headers\Sound.h" />
+    <ClInclude Include="Code\Headers\SpriteRenderer.h" />
+    <ClInclude Include="Code\Headers\Texture.h" />
+    <ClInclude Include="Code\Headers\Time.h" />
+    <ClInclude Include="Code\Headers\Transform.h" />
+    <ClInclude Include="Code\Headers\Vector2.h" />
+    <ClInclude Include="Code\Headers\Vector3.h" />
+    <ClInclude Include="Code\Headers\Window.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{638FE49C-9AD9-4B1E-A4ED-0FAAB9AB630B}</ProjectGuid>
+    <RootNamespace>AwkwardEngine</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>D:\Docs\Game Development\_Librarys\SDL2_mixer-2.0.0\include;D:\Docs\Game Development\_Librarys\SDL2_ttf-2.0.12\include;D:\Docs\Game Development\_Librarys\SDL2_image-2.0.0\include;D:\Docs\Game Development\_Librarys\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Docs\Game Development\_Librarys\SDL2_mixer-2.0.0\lib\x86;D:\Docs\Game Development\_Librarys\SDL2_ttf-2.0.12\lib\x86;D:\Docs\Game Development\_Librarys\SDL2_image-2.0.0\lib\x86;D:\Docs\Game Development\_Librarys\SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_TTF.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
