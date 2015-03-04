@@ -169,40 +169,43 @@ int main(int argc, char* args[])
 			Time::Update();
 
 			// Handle events on queue
+				// Reset Input first.
+			Input::RemoveKeyUpDownFlags();
+
 			while (SDL_PollEvent(&e) != NULL)
 			{
 				if (e.type == SDL_QUIT)
 				{
 					quit = true;
 				}
-				if (e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP || e.type == SDL_MOUSEWHEEL)
+				if (e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP || e.type == SDL_MOUSEWHEEL || e.type == SDL_KEYDOWN || e.type == SDL_KEYUP)
 				{
-					Input::updateMouse();
+					Input::HandleEvent(e);
 				}
 			}
 			
-			if (Input::getKeyDown(SDL_SCANCODE_A) || Input::mouse.LButton)
+			if (Input::getKey(SDL_SCANCODE_A) || Input::getMouse(Input::MouseButton::Left))
 				degrees -= 1;
-			if (Input::getKeyDown(SDL_SCANCODE_D) || Input::mouse.RButton)
+			if (Input::getKey(SDL_SCANCODE_D) || Input::getMouse(Input::MouseButton::Right))
 				degrees += 1;
-			if (Input::getKeyDown(SDL_SCANCODE_Q))
+			if (Input::getKey(SDL_SCANCODE_Q))
 				flipType = SDL_FLIP_HORIZONTAL;
-			if (Input::getKeyDown(SDL_SCANCODE_W))
+			if (Input::getKey(SDL_SCANCODE_W))
 				flipType = SDL_FLIP_NONE;
-			if (Input::getKeyDown(SDL_SCANCODE_E))
+			if (Input::getKey(SDL_SCANCODE_E))
 				flipType = SDL_FLIP_VERTICAL;
-			if (Input::getKeyDown(SDL_SCANCODE_U))
+			if (Input::getKey(SDL_SCANCODE_U))
 				gSound.Play();
-			if (Input::getKeyDown(SDL_SCANCODE_DOWN))
+			if (Input::getKey(SDL_SCANCODE_DOWN))
 				cam->transform->Position.y--;
-			if (Input::getKeyDown(SDL_SCANCODE_UP))
+			if (Input::getKey(SDL_SCANCODE_UP))
 				cam->transform->Position.y++;
-			if (Input::getKeyDown(SDL_SCANCODE_RIGHT))
+			if (Input::getKey(SDL_SCANCODE_RIGHT))
 				cam->transform->Position.x--;
-			if (Input::getKeyDown(SDL_SCANCODE_LEFT))
+			if (Input::getKey(SDL_SCANCODE_LEFT))
 				cam->transform->Position.x++;
 
-			mousePointer->transform->Position = { (float)Input::mouse.posX, (float)Input::mouse.posY, 0.0f };
+			mousePointer->transform->Position = { (float)Input::getMousePositionX(), (float)Input::getMousePositionY(), 0.0f };
 			mousePointer->transform->Position -= cam->transform->Position;
 
 			mousePointerStep += Time::getDeltaTime();

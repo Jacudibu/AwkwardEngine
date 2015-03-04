@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Vector3.h"
+
 struct Vector2
 {
 	Vector2();

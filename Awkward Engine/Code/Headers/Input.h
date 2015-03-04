@@ -1,42 +1,50 @@
-#pragma once
-
 #include <SDL.h>
 
-// TODO: Include SCROLL WHEEL!
-
-/* Class to Manage User Input of any type.
- */
-class Input
+namespace Input
 {
-public:
-
-	/* Used to manage Mouse input.
-	 */ // TODO: SCROLL THE WHEEL!
-	struct MouseInput
+	// Enum to Handle Mouse Buttons in a convinient way.
+	enum MouseButton
 	{
-		int posX;
-		int posY;
-		bool LButton;
-		bool MButton;
-		bool RButton;
-	}; // TODO: SCROLL WHEEEEEEEEEL!
+		Left = 0,
+		Middle = 1,
+		Right = 2,
+	};
 
-	/* Used to Update Mouse Movement.
-	   Automatically called whenever a Mouse event occurs, no need to use this for normal people. :P
-	*/
-	static void updateMouse(); // #TODO: protected & friends with Game
+	// Returns true if the given Key is currently hold down.
+	bool getKey(SDL_Scancode scancode);
 
-	/* Used to check wether a Key is pressed. 
-	   For SDL_Scancode References, go to http://wiki.libsdl.org/SDL_Scancode.
-	 */
-	static bool getKeyDown(SDL_Scancode query);
-
-	// Sets wether the OS-Mousecursor is supposed to be displayed or not.
-	static void displayMouseCursor(bool enabled);
+	// Returns true if the given Key got released during the last frame.
+	bool getKeyUp(SDL_Scancode scancode);
 	
-	// Query Mouse Input here.
-	static MouseInput mouse;
+	// Returns true if the given Key got pushed.
+	bool getKeyDown(SDL_Scancode scancode);
 
-private:
-	static const Uint8* currentKeyStates;
-};
+	//  Returns the current X Position of the Mouse.
+	int getMousePositionX();
+
+	// Returns the current Y Position of the Mouse.
+	int getMousePositionY();
+
+	// Returns true if the given mouseButton is currently hold down.
+	bool getMouse(MouseButton button);
+
+	// Returns true if the given mouseButton got released during the last frame.
+	bool getMouseUp(MouseButton button);
+
+	// Returns true if the given mouseButton got pressed.
+	bool getMouseDown(MouseButton button);
+
+	void displayMouseCursor(bool enabled);
+
+
+	// ---- Do Not touch these!
+
+	// Removes all KeyDown and KeyUp Events.
+	// Therefore it is called before the Events are handled.
+	// Don't call that anywhere else if you don't know what you're doing.
+	void RemoveKeyUpDownFlags();
+
+	// Handles all incoming SDL_Events regarding Input.
+	// Thats normally done by the game loop, so no need to call that.
+	void HandleEvent(SDL_Event e);
+}
