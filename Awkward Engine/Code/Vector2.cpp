@@ -12,6 +12,11 @@ Vector2::Vector2(float _x, float _y)
 	y = _y;
 }
 
+Vector2 Vector2::Normalized()
+{
+	return {x / (x + y), y / (x + y)};
+}
+
 Vector2 Vector2::Lerp(Vector2 start, Vector2 end, float percent)
 {
 	return start;
@@ -22,21 +27,10 @@ Vector2 Vector2::Slerp(Vector2 start, Vector2 end, float percent)
 	return start;
 }
 
-Vector2 Vector2::Dot(Vector2 a, Vector2 b)
+float Vector2::Dot(Vector2 a, Vector2 b)
 {
-	return a;
+	return (a.x * b.x + a.y * b.y);
 }
-
-Vector2 Vector2::Cross(Vector2 a, Vector2 b)
-{
-	return a;
-}
-
-
-
-
-
-
 
 // Overloaded Operands.
 Vector2 &Vector2::operator+=(const Vector2 &other)
@@ -57,6 +51,12 @@ Vector2 &Vector2::operator*=(const Vector2 &other)
 	y *= other.y;
 	return *this;
 }
+Vector2 &Vector2::operator*=(const float &other)
+{
+	x *= other;
+	y *= other;
+	return *this;
+}
 
 inline Vector2 operator+(Vector2 that, const Vector2 &other)
 {
@@ -69,6 +69,11 @@ inline Vector2 operator-(Vector2 that, const Vector2 &other)
 	return that;
 }
 inline Vector2 operator*(Vector2 that, const Vector2 &other)
+{
+	that *= other;
+	return that;
+}
+inline Vector2 operator*(Vector2 that, const float &other)
 {
 	that *= other;
 	return that;

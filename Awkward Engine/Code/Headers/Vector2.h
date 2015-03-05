@@ -10,25 +10,24 @@ struct Vector2
 	float x;
 	float y;
 
+	// Returns a normalized version of the Vector with a magnitude of 1.
+	Vector2 Normalized();
+
+	// --- Statics ---
+
 	// Smoothly moves Vector at its current position between start and end, depending on percent in Range[0,1].
 	static Vector2 Lerp(Vector2 start, Vector2 end, float percent);
 
 	// Yet unimplemented.
-	// Lerps the Vector in a curvy form.
+	// Uses sinus to make a linear interpolation not look THAT constant.
 	static Vector2 Slerp(Vector2 start, Vector2 end, float percent);
 
-	// Yet unimplemented.
-	// Dot product of Vector1 and Vector2
-	static Vector2 Dot(Vector2 a, Vector2 b);
+	// Dot product of Vector a and Vector b
+	static float Dot(Vector2 a, Vector2 b);
 
-	// Yet unimplemented.
-	// Cross product of Vector1 and Vector2
-	static Vector2 Cross(Vector2 a, Vector2 b);
-
-
-
-	// Overloaded Operands.
+	// Overloaded Operands to play with.
 	Vector2 &operator+=(const Vector2 &other);
 	Vector2 &operator-=(const Vector2 &other);
 	Vector2 &operator*=(const Vector2 &other);
+	Vector2 &operator*=(const float &other);
 };
