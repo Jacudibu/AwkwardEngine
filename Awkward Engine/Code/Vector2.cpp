@@ -1,4 +1,5 @@
 #include "Headers\Vector2.h"
+#include "Headers\aMath.h"
 
 Vector2::Vector2()
 {
@@ -19,12 +20,14 @@ Vector2 Vector2::Normalized()
 
 Vector2 Vector2::Lerp(Vector2 start, Vector2 end, float percent)
 {
-	return start;
+	return{ aMath::lerp(start.x, end.x, percent),
+			aMath::lerp(start.y, end.y, percent) };
 }
 
 Vector2 Vector2::Slerp(Vector2 start, Vector2 end, float percent)
 {
-	return start;
+	return{ aMath::smoothlerp(start.x, end.x, percent),
+			aMath::smoothlerp(start.y, end.y, percent) };
 }
 
 float Vector2::Dot(Vector2 a, Vector2 b)

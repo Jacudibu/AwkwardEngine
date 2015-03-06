@@ -1,4 +1,5 @@
 #include "Headers\Vector3.h"
+#include "Headers\aMath.h"
 
 Vector3::Vector3()
 {
@@ -16,12 +17,16 @@ Vector3::Vector3(float _x, float _y, float _z)
 
 Vector3 Vector3::Lerp(Vector3 start, Vector3 end, float percent)
 {
-	return start;
+	return {aMath::lerp(start.x, end.x, percent),
+			aMath::lerp(start.y, end.y, percent),
+			aMath::lerp(start.z, end.z, percent)};
 }
 
 Vector3 Vector3::Slerp(Vector3 start, Vector3 end, float percent)
 {
-	return start;
+	return {aMath::smoothlerp(start.x, end.x, percent),
+			aMath::smoothlerp(start.y, end.y, percent),
+			aMath::smoothlerp(start.z, end.z, percent)};
 }
 
 float Vector3::Dot(Vector3 a, Vector3 b)

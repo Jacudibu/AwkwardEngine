@@ -15,11 +15,10 @@ struct Vector2
 
 	// --- Statics ---
 
-	// Smoothly moves Vector at its current position between start and end, depending on percent in Range[0,1].
+	// Smoothly moves between start and end, depending on percent in Range[0,1].
 	static Vector2 Lerp(Vector2 start, Vector2 end, float percent);
 
-	// Yet unimplemented.
-	// Uses sinus to make a linear interpolation not look THAT constant.
+	// Smoothly lerps the Vector between start and end.
 	static Vector2 Slerp(Vector2 start, Vector2 end, float percent);
 
 	// Dot product of Vector a and Vector b

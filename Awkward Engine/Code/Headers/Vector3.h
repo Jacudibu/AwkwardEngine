@@ -14,11 +14,10 @@ struct Vector3
 
 	// --- Statics ---
 
-	// Smoothly moves Vector at its current position between start and end, depending on percent in Range[0,1].
+	// Smoothly moves Vector between start and end, depending on percent in Range[0,1].
 	static Vector3 Lerp(Vector3 start, Vector3 end, float percent);
 
-	// Yet unimplemented.
-	// Lerps the Vector in a curvy form.
+	// Smoothly lerps the Vector between start and end.
 	static Vector3 Slerp(Vector3 start, Vector3 end, float percent);
 
 	// Dot product of Vector a and Vector b

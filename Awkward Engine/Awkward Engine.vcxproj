@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Code\aMath.cpp" />
     <ClCompile Include="Code\Camera.cpp" />
     <ClCompile Include="Code\Game.cpp" />
     <ClCompile Include="Code\GameObject.cpp" />
@@ -31,6 +32,7 @@
     <ClCompile Include="Code\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Code\Headers\aMath.h" />
     <ClInclude Include="Code\Headers\Camera.h" />
     <ClInclude Include="Code\Headers\Component.h" />
     <ClInclude Include="Code\Headers\GameObject.h" />
