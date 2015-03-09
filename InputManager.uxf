@@ -4,15 +4,19 @@
   <element>
     <type>CustomElementImpl</type>
     <coordinates>
-      <x>180</x>
+      <x>260</x>
       <y>10</y>
       <w>331</w>
-      <h>431</h>
+      <h>481</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Namespace&gt;&gt;
 Input
 --
++ connectedControllers : int
 --
++ Init(void)
++ Shutdown(void)
++ HandleEvent(SDL_Event e)
 + GetKey(SDL_Keycode) : bool
 + GetKeyUp(SDL_Keycode) : bool
 + GetKeyDown(SDL_Keycode) : bool
@@ -22,7 +26,6 @@ Input
 + getMousePositionX(void) : int
 + getMousePositionY(void) : int
 + RemoveKeyUpDownFlags(void)
-+ HandleEvent(SDL_Event e)
 
 //Keyboard:
 - HandleKeyDown(SDL_Event e)
@@ -78,8 +81,8 @@ drawRectangle(0,0,onGrid(width),onGrid(height));</custom_code>
   <element>
     <type>CustomElementImpl</type>
     <coordinates>
-      <x>150</x>
-      <y>520</y>
+      <x>340</x>
+      <y>540</y>
       <w>121</w>
       <h>111</h>
     </coordinates>
@@ -130,21 +133,21 @@ drawRectangle(0,0,onGrid(width),onGrid(height));</custom_code>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>200</x>
-      <y>430</y>
+      <x>390</x>
+      <y>460</y>
       <w>190</w>
-      <h>110</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
 m2=SDL_NUM_SCANCODES</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <type>CustomElementImpl</type>
     <coordinates>
-      <x>380</x>
-      <y>520</y>
+      <x>660</x>
+      <y>540</y>
       <w>141</w>
       <h>111</h>
     </coordinates>
@@ -195,27 +198,104 @@ drawRectangle(0,0,onGrid(width),onGrid(height));</custom_code>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>460</x>
-      <y>430</y>
-      <w>30</w>
-      <h>110</h>
+      <x>580</x>
+      <y>360</y>
+      <w>190</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
 m2=1</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+    <additional_attributes>10.0;10.0;170.0;10.0;170.0;180.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>260</x>
-      <y>560</y>
-      <w>140</w>
+      <x>450</x>
+      <y>580</y>
+      <w>230</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
 m2=3</panel_attributes>
-    <additional_attributes>120.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>210.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <type>CustomElementImpl</type>
+    <coordinates>
+      <x>0</x>
+      <y>540</y>
+      <w>231</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;struct&gt;&gt;
+Controller
+--
++ controller : SDL_GameController*
++ haptic : SDL_Haptic*
+--
+</panel_attributes>
+    <additional_attributes/>
+    <custom_code>setAutoresize(20,15,5);
+
+int y=textHeight();
+
+boolean center = true;
+for(int i = 0; i &lt; textlines.size(); i++) {
+	String textline = textlines.get(i);
+
+	// Lets format some special characteres.
+	textline = textline.replaceAll("&gt;&gt;", "»");
+	textline = textline.replaceAll("&lt;&lt;", "«");
+
+	// If we entered --, draw a line and set centered to false.
+	if(textline.equals("--")) {
+		drawLineHorizontal((int) (y-textHeight()*0.7));
+		center = false;
+		if (!isManualResized()) height -= (int) (textHeight()*0.75);
+		y += textHeight()*0.3;
+	}
+	
+	// If the line begins with static, we underline the line.
+	else if (textline.split(" ", 2)[0].equals("static"))
+	{
+		if (center) y+= printCenter("_" + textline.split(" ", 2)[1] + "_",y);
+		else y += printLeft("_" + textline.split(" ", 2)[1] + "_",y);
+	}
+	// Default: print text normally
+	else {
+		if (center) y += printCenter(textline,y); 
+		else y += printLeft(textline,y);
+	}
+}
+
+drawRectangle(0,0,onGrid(width),onGrid(height));</custom_code>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>110</x>
+      <y>360</y>
+      <w>170</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=SDL_NumJoysticks()</panel_attributes>
+    <additional_attributes>150.0;10.0;10.0;10.0;10.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>80</x>
+      <y>590</y>
+      <w>280</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=SDL_CONTROLLER_BUTTON_MAX</panel_attributes>
+    <additional_attributes>150.0;10.0;260.0;40.0</additional_attributes>
   </element>
 </diagram>

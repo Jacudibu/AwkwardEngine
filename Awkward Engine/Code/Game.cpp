@@ -8,15 +8,15 @@
 #include <cmath> // ????
 #include <sstream> // Used for FPS
 
-#include "Headers/Input.h"
-#include "Headers/Texture.h"
-#include "Headers/Time.h"
-#include "Headers/Music.h"
-#include "Headers/Sound.h"
-#include "Headers/SpriteRenderer.h"
-#include "Headers/TextRenderer.h"
-#include "Headers/Camera.h"
-#include "Headers/Window.h"
+#include "Input/Input.h"
+#include "Renderer/Texture.h"
+#include "Renderer/SpriteRenderer.h"
+#include "Renderer/TextRenderer.h"
+#include "Renderer/Camera.h"
+#include "Renderer/Window.h"
+#include "Utility/Time.h"
+#include "Audio/Music.h"
+#include "Audio/Sound.h"
 
 // Screen dimension constants - #TODO: Put these into superfancy config files!
 const int SCREEN_WIDTH = 640;
@@ -38,10 +38,12 @@ Camera* cam;
 
 SpriteRenderer* cursorRenderer;
 
+SDL_GameController* GameController = NULL;
+
 bool init()
 {
 	// Initialize SDL
-	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_GAMECONTROLLER | SDL_INIT_HAPTIC) < 0)
 	{
 		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
 		return false;
@@ -68,6 +70,9 @@ bool init()
 		printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
 		return false;
 	}
+
+	// Initialize Controllers
+	Input::Init();
 
 	gWindow = new Window(SCREEN_WIDTH, SCREEN_HEIGHT, "Awkward Engine Version 0.0.0.0.0.0.0.0.1e", SDL_RENDERER_ACCELERATED /*| SDL_RENDERER_PRESENTVSYNC*/);
 	cam = new Camera(gWindow, nullptr);
@@ -119,6 +124,9 @@ void close()
 	gArrowTexture->~SpriteRenderer();
 	gFPSRenderer->~TextRenderer();
 	gSound.free();
+
+	// Close Controllers
+	Input::Shutdown();
 
 	// Free global font
 	TTF_CloseFont(gFont);
@@ -178,10 +186,14 @@ int main(int argc, char* args[])
 				{
 					quit = true;
 				}
-				if (e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP || e.type == SDL_MOUSEWHEEL || e.type == SDL_KEYDOWN || e.type == SDL_KEYUP)
+				if (e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP || e.type == SDL_MOUSEWHEEL
+				 || e.type == SDL_KEYDOWN || e.type == SDL_KEYUP
+				 || e.type == SDL_CONTROLLERAXISMOTION || e.type == SDL_CONTROLLERBUTTONDOWN || e.type == SDL_CONTROLLERBUTTONUP
+				 || e.type == SDL_CONTROLLERDEVICEREMOVED || e.type == SDL_CONTROLLERDEVICEADDED)
 				{
 					Input::HandleEvent(e);
 				}
+
 			}
 			
 			if (Input::getKey(SDL_SCANCODE_A) || Input::getMouse(Input::MouseButton::Left))

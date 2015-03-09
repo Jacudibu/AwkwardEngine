@@ -1,135 +1,160 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{a05b2343-b6e1-494d-a5fa-0e89ca2316e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Input">
+      <UniqueIdentifier>{d7b5fe00-cd46-48dd-b387-66835fbbc685}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core">
+      <UniqueIdentifier>{97bddd84-6e41-4d40-b64f-81ba38c7aef3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Audio">
+      <UniqueIdentifier>{b43886b1-981a-47f4-94a8-7da37631976f}</UniqueIdentifier>
+      <Extensions>
+      </Extensions>
+    </Filter>
+    <Filter Include="Engine\Renderer">
+      <UniqueIdentifier>{e0f79a93-fb67-440a-960d-3a4de03f62e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Utility">
+      <UniqueIdentifier>{c8935675-dcb5-4e69-8687-f39de7b1001a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Code\Input.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Code\Input\Input.cpp">
+      <Filter>Engine\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Texture.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Code\Utility\Vector3.cpp">
+      <Filter>Engine\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Utility\aMath.cpp">
+      <Filter>Engine\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Utility\Vector2.cpp">
+      <Filter>Engine\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Renderer\Renderer.cpp">
+      <Filter>Engine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Renderer\RenderLayer.cpp">
+      <Filter>Engine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Renderer\SpriteRenderer.cpp">
+      <Filter>Engine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Renderer\TextRenderer.cpp">
+      <Filter>Engine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Renderer\Texture.cpp">
+      <Filter>Engine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Renderer\Window.cpp">
+      <Filter>Engine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Renderer\Camera.cpp">
+      <Filter>Engine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Utility\ResourceManager.cpp">
+      <Filter>Engine\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Audio\Music.cpp">
+      <Filter>Engine\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Audio\Sound.cpp">
+      <Filter>Engine\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Utility\Time.cpp">
+      <Filter>Engine\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\GameObject.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\Scene.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Core\Transform.cpp">
+      <Filter>Engine\Core</Filter>
     </ClCompile>
     <ClCompile Include="Code\Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Time.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Music.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Sound.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Vector3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Transform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Vector2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\SpriteRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\RenderLayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\ResourceManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\TextRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\aMath.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Code\Headers\GameObject.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Code\Input\Controller.h">
+      <Filter>Engine\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Headers\Input.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Code\Input\Input.h">
+      <Filter>Engine\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Headers\Music.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Code\Input\KeyState.h">
+      <Filter>Engine\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Headers\Sound.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Code\Input\MouseState.h">
+      <Filter>Engine\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Headers\Texture.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Code\Utility\Vector2.h">
+      <Filter>Engine\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Headers\Time.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Code\Utility\Vector3.h">
+      <Filter>Engine\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Headers\Transform.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Code\Utility\aMath.h">
+      <Filter>Engine\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Headers\Vector2.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Code\Renderer\Camera.h">
+      <Filter>Engine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Headers\Vector3.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Code\Renderer\Renderer.h">
+      <Filter>Engine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Headers\Component.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Code\Renderer\RenderLayer.h">
+      <Filter>Engine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Headers\Renderer.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Code\Renderer\SpriteRenderer.h">
+      <Filter>Engine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Headers\RenderLayer.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Code\Renderer\TextRenderer.h">
+      <Filter>Engine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Headers\SpriteRenderer.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Code\Renderer\Texture.h">
+      <Filter>Engine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Headers\Scene.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Code\Renderer\Window.h">
+      <Filter>Engine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Headers\Camera.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Code\Utility\ResourceManager.h">
+      <Filter>Engine\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Headers\Window.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Code\Audio\Music.h">
+      <Filter>Engine\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Headers\ResourceManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Code\Audio\Sound.h">
+      <Filter>Engine\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Headers\TextRenderer.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Code\Utility\Time.h">
+      <Filter>Engine\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Headers\aMath.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Code\Core\GameObject.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\Scene.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\Transform.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Core\Component.h">
+      <Filter>Engine\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
