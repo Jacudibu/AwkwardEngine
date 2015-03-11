@@ -15,6 +15,7 @@
 #include "Renderer/Camera.h"
 #include "Renderer/Window.h"
 #include "Utility/Time.h"
+#include "Utility/ResourceManager.h"
 #include "Audio/Music.h"
 #include "Audio/Sound.h"
 
@@ -120,10 +121,8 @@ bool loadMedia()
 
 void close()
 {
-	// Free loaded image
-	gArrowTexture->~SpriteRenderer();
-	gFPSRenderer->~TextRenderer();
-	gSound.free();
+	// Free loaded stuff
+	ResourceManager::Shutdown();
 
 	// Close Controllers
 	Input::Shutdown();

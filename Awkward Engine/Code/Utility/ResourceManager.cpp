@@ -161,4 +161,21 @@ namespace ResourceManager
 
 	}
 
+	void Shutdown()
+	{
+		for (std::pair<std::string, TextureWithCount> t : textures)
+		{
+			delete (t.second.texture);
+		}
+
+		for (std::pair<std::string, SoundWithCount> t : sounds)
+		{
+			delete (t.second.sound);
+		}
+
+		for (std::pair<std::string, MusicWithCount> t : music)
+		{
+			delete (t.second.music);
+		}
+	}
 }

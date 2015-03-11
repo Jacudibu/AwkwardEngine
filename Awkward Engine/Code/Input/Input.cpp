@@ -114,8 +114,6 @@ namespace Input
 				x++;
 			}
 		}
-
-		
 	}
 	
 	void Shutdown()
