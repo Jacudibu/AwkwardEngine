@@ -190,13 +190,13 @@ int main(int argc, char* args[])
 				degrees -= 1 * Time::getDeltaTime() * 100.0f;
 			if (Input::getKey(SDL_SCANCODE_D) || Input::getMouse(Input::MouseButton::Right))
 				degrees += 1 * Time::getDeltaTime() * 100.0f;
-			if (Input::getKey(SDL_SCANCODE_Q))
+			if (Input::getKeyDown(SDL_SCANCODE_Q))
 				flipType = SDL_FLIP_HORIZONTAL;
-			if (Input::getKey(SDL_SCANCODE_W))
+			if (Input::getKeyDown(SDL_SCANCODE_W))
 				flipType = SDL_FLIP_NONE;
-			if (Input::getKey(SDL_SCANCODE_E))
+			if (Input::getKeyDown(SDL_SCANCODE_E))
 				flipType = SDL_FLIP_VERTICAL;
-			if (Input::getKey(SDL_SCANCODE_U))
+			if (Input::getKeyDown(SDL_SCANCODE_U))
 				((Sound*)soundObject->getComponent("Sound"))->Play();
 			if (Input::getKey(SDL_SCANCODE_DOWN))
 				cam->transform->Position.y--;
