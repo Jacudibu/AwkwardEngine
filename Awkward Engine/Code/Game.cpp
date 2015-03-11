@@ -26,10 +26,6 @@ const int SCREEN_HEIGHT = 480;
 Window*  gWindow = nullptr;
 TTF_Font* gFont = nullptr;
 
-TextRenderer* gFPSRenderer;
-SpriteRenderer* gArrowTexture;
-
-Sound* gSound;
 
 RenderLayer* renderLayer;
 GameObject* mousePointer;
@@ -37,8 +33,6 @@ GameObject* arrowObject;
 GameObject* fpsObject;
 GameObject* soundObject;
 Camera* cam;
-
-SpriteRenderer* cursorRenderer;
 
 SDL_GameController* GameController = NULL;
 
@@ -104,18 +98,13 @@ bool loadMedia()
 	fpsObject = new GameObject();
 	soundObject = new GameObject();
 
-	gSound = new Sound("resources/testsounds/low.wav", 10);
-	soundObject->addComponent(gSound);
-
-	cursorRenderer = new SpriteRenderer("resources/cursor.png", renderLayer, 1, 2, 1);
-	mousePointer->addComponent(cursorRenderer);
+	soundObject->addComponent(new Sound("resources/testsounds/low.wav", 10));
+	mousePointer->addComponent(new SpriteRenderer("resources/cursor.png", renderLayer, 1, 2, 1));
 	
-	gArrowTexture = new SpriteRenderer("resources/alphaArrow.png", renderLayer);
-	arrowObject->addComponent(gArrowTexture);
+	arrowObject->addComponent(new SpriteRenderer("resources/alphaArrow.png", renderLayer));
 	arrowObject->transform->Position = { SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0 };
 
-	gFPSRenderer = new TextRenderer("", renderLayer, {0x0, 0x0, 0x0, 0xFF});
-	fpsObject->addComponent(gFPSRenderer);
+	fpsObject->addComponent(new TextRenderer("", renderLayer, { 0x0, 0x0, 0x0, 0xFF }));
 	fpsObject->transform->Position = { SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0 };
 
 	return success;
@@ -208,7 +197,7 @@ int main(int argc, char* args[])
 			if (Input::getKey(SDL_SCANCODE_E))
 				flipType = SDL_FLIP_VERTICAL;
 			if (Input::getKey(SDL_SCANCODE_U))
-				gSound->Play();
+				((Sound*)soundObject->getComponent("Sound"))->Play();
 			if (Input::getKey(SDL_SCANCODE_DOWN))
 				cam->transform->Position.y--;
 			if (Input::getKey(SDL_SCANCODE_UP))
@@ -218,22 +207,29 @@ int main(int argc, char* args[])
 			if (Input::getKey(SDL_SCANCODE_LEFT))
 				cam->transform->Position.x++;
 
-			mousePointer->transform->Position = { (float)Input::getMousePositionX(), (float)Input::getMousePositionY(), 0.0f };
-			mousePointer->transform->Position -= cam->transform->Position;
-
-			mousePointerStep += Time::getDeltaTime();
-			cursorRenderer->setCurrentClip(((int)mousePointerStep % 2) + 1);
-
 			// Set text to be rendered
 			timeText.str("");
 			timeText << "FPS: " << Time::getFPS();
 
-			// Render Text
-			gFPSRenderer->setText(timeText.str());
+			// Adjust fps text
+			((TextRenderer*)fpsObject->getComponent("TextRenderer"))->setText(timeText.str());
 
-			// Render current frame
+			// Change mouse cursor
+			mousePointer->transform->Position = { (float)Input::getMousePositionX(), (float)Input::getMousePositionY(), 0.0f };
+			mousePointer->transform->Position -= cam->transform->Position;
+
+			mousePointerStep += Time::getDeltaTime();
+
+			((SpriteRenderer*)mousePointer->getComponent("SpriteRenderer"))->setCurrentClip(((int)mousePointerStep % 2) + 1);
+
+			// Rotate Objects
+			((SpriteRenderer*)arrowObject->getComponent("SpriteRenderer"))->flip = flipType;
+			((TextRenderer*)fpsObject->getComponent("TextRenderer"))->flip = flipType;
+
 			fpsObject->transform->Rotation = degrees;
 			arrowObject->transform->Rotation = degrees;
+
+			// Render current frame
 
 			gWindow->Render();
 
