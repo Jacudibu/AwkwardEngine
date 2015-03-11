@@ -421,10 +421,10 @@ drawRectangle(0,0,onGrid(width),onGrid(height));</custom_code>
     <coordinates>
       <x>150</x>
       <y>420</y>
-      <w>81</w>
+      <w>51</w>
       <h>41</h>
     </coordinates>
-    <panel_attributes>UserScripts
+    <panel_attributes>Scripts
 --
 
 --</panel_attributes>
@@ -1329,7 +1329,7 @@ drawRectangle(0,0,onGrid(width),onGrid(height));</custom_code>
       <x>320</x>
       <y>900</y>
       <w>551</w>
-      <h>281</h>
+      <h>291</h>
     </coordinates>
     <panel_attributes>&lt;&lt;namespace&gt;&gt;
 ResourceManager
@@ -1342,6 +1342,7 @@ ResourceManager
 - sounds : std::map(string, SoundWithCount)
 - musics : std::map(string, TextureWithCount)
 --
++ Shutdown(void)
 + loadTextureFromFile(std::string, SDL_Renderer*) : Texture* 
 + loadTextureFromText(std::string, SDL_Renderer*, SDL_Color, TTF_Font*) : Texture*
 + loadSoundFromFile(std::string) : Mix_Chunk*

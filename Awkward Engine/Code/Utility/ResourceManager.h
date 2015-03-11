@@ -40,7 +40,4 @@ namespace ResourceManager
 
 	// Unloads a music if it is no longer needed.
 	void unloadMusic(std::string path);
-
-	// Frees all the Resources. Call this when the Game is supposed to close.
-	void Shutdown();
 };

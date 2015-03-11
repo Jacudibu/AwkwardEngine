@@ -6,6 +6,9 @@
 class Scene
 {
 public:
+	Scene();
+	~Scene();
+
 	// Calls the Update function of every GameObject inside the Scene.
 	void Update();
 

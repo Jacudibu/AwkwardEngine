@@ -29,12 +29,13 @@ TTF_Font* gFont = nullptr;
 TextRenderer* gFPSRenderer;
 SpriteRenderer* gArrowTexture;
 
-Sound gSound;
+Sound* gSound;
 
 RenderLayer* renderLayer;
 GameObject* mousePointer;
 GameObject* arrowObject;
 GameObject* fpsObject;
+GameObject* soundObject;
 Camera* cam;
 
 SpriteRenderer* cursorRenderer;
@@ -75,7 +76,7 @@ bool init()
 	// Initialize Controllers
 	Input::Init();
 
-	gWindow = new Window(SCREEN_WIDTH, SCREEN_HEIGHT, "Awkward Engine Version 0.0.0.0.0.0.0.0.1e", SDL_RENDERER_ACCELERATED /*| SDL_RENDERER_PRESENTVSYNC*/);
+	gWindow = new Window(SCREEN_WIDTH, SCREEN_HEIGHT, "Awkward Engine Version 0.0.0.0.0.0.0.0.1f", SDL_RENDERER_ACCELERATED /*| SDL_RENDERER_PRESENTVSYNC*/);
 	cam = new Camera(gWindow, nullptr);
 	renderLayer = new RenderLayer();
 	cam->addLayer(renderLayer);
@@ -98,12 +99,13 @@ bool loadMedia()
 	TextRenderer::font = gFont;
 
 
-	gSound.loadSoundFromFile("resources/testsounds/low.wav");
-	gSound.setVolume(10);
-
 	mousePointer = new GameObject();
 	arrowObject = new GameObject();
 	fpsObject = new GameObject();
+	soundObject = new GameObject();
+
+	gSound = new Sound("resources/testsounds/low.wav", 10);
+	soundObject->addComponent(gSound);
 
 	cursorRenderer = new SpriteRenderer("resources/cursor.png", renderLayer, 1, 2, 1);
 	mousePointer->addComponent(cursorRenderer);
@@ -121,8 +123,11 @@ bool loadMedia()
 
 void close()
 {
-	// Free loaded stuff
-	ResourceManager::Shutdown();
+	// Delete Game Objects
+	delete mousePointer;
+	delete arrowObject;
+	delete fpsObject;
+	delete soundObject;
 
 	// Close Controllers
 	Input::Shutdown();
@@ -132,7 +137,7 @@ void close()
 	gFont = nullptr;
 
 	// Destroy window
-	gWindow->~Window();
+	delete gWindow;
 	gWindow   = nullptr;
 
 	// Quit SDL subysystems
@@ -181,24 +186,21 @@ int main(int argc, char* args[])
 
 			while (SDL_PollEvent(&e) != NULL)
 			{
-				if (e.type == SDL_QUIT)
+				switch (e.type)
 				{
+				case SDL_QUIT:
 					quit = true;
-				}
-				if (e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP || e.type == SDL_MOUSEWHEEL
-				 || e.type == SDL_KEYDOWN || e.type == SDL_KEYUP
-				 || e.type == SDL_CONTROLLERAXISMOTION || e.type == SDL_CONTROLLERBUTTONDOWN || e.type == SDL_CONTROLLERBUTTONUP
-				 || e.type == SDL_CONTROLLERDEVICEREMOVED || e.type == SDL_CONTROLLERDEVICEADDED)
-				{
+					break;
+				default:	// No Event thats handled by the Game Loop, most likely Input. So let's send it to Input.
 					Input::HandleEvent(e);
+					break;
 				}
-
 			}
 			
 			if (Input::getKey(SDL_SCANCODE_A) || Input::getMouse(Input::MouseButton::Left))
-				degrees -= 1;
+				degrees -= 1 * Time::getDeltaTime() * 100.0f;
 			if (Input::getKey(SDL_SCANCODE_D) || Input::getMouse(Input::MouseButton::Right))
-				degrees += 1;
+				degrees += 1 * Time::getDeltaTime() * 100.0f;
 			if (Input::getKey(SDL_SCANCODE_Q))
 				flipType = SDL_FLIP_HORIZONTAL;
 			if (Input::getKey(SDL_SCANCODE_W))
@@ -206,7 +208,7 @@ int main(int argc, char* args[])
 			if (Input::getKey(SDL_SCANCODE_E))
 				flipType = SDL_FLIP_VERTICAL;
 			if (Input::getKey(SDL_SCANCODE_U))
-				gSound.Play();
+				gSound->Play();
 			if (Input::getKey(SDL_SCANCODE_DOWN))
 				cam->transform->Position.y--;
 			if (Input::getKey(SDL_SCANCODE_UP))
@@ -240,7 +242,9 @@ int main(int argc, char* args[])
 		}
 	}
 
-	//SDL_Delay(1000);
+	// Wait a seccond before Exiting. Makes it more dramatic.
+	SDL_Delay(1000);
+
 	// Free resources
 	close();
 

@@ -9,10 +9,16 @@ GameObject::GameObject()
 GameObject::~GameObject()
 {
 	delete(transform);
+
+	for (Component* comp : components)
+	{
+		delete comp;
+	}
 }
 
 void GameObject::addComponent(Component* comp)
 {
+	// If the Component was attached to another GameObject before, remove it.
 	if (comp->gameObject != nullptr)
 		comp->gameObject->removeComponent(comp);
 

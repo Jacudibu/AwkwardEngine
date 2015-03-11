@@ -9,11 +9,12 @@ class Sound : public Component
 {
 public:
 	Sound();
+	Sound(std::string filePath, Uint8 volume = 128);
 	~Sound();
 
 	// Loads the soundfile from given path.
 	// Supported formats: WAVE, AIFF, RIFF, OGG, VOC
-	void loadSoundFromFile(std::string filePath);
+	void loadSoundFromFile(std::string filePath, Uint8 volume = 128);
 
 	// Plays the Sound.
 	void Play();

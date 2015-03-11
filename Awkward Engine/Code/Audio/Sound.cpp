@@ -6,6 +6,11 @@ Sound::Sound()
 	sound = nullptr;
 }
 
+Sound::Sound(std::string filePath, Uint8 volume)
+{
+	loadSoundFromFile(filePath, volume);
+}
+
 Sound::~Sound()
 {
 	free();
@@ -21,12 +26,13 @@ void Sound::free()
 	}
 }
 
-void Sound::loadSoundFromFile(std::string filePath)
+void Sound::loadSoundFromFile(std::string filePath, Uint8 volume)
 {
 	free();
 
 	sound = ResourceManager::loadSoundFromFile(filePath);
 	path =  filePath;
+	setVolume(volume);
 }
 
 void Sound::Play()

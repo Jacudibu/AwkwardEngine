@@ -1,5 +1,18 @@
 #include "Scene.h"
 
+Scene::Scene()
+{
+	// Currently does nothing. Thats boring.
+}
+
+Scene::~Scene()
+{
+	for (GameObject* object : objectList)
+	{
+		delete object;
+	}
+}
+
 void Scene::Update()
 {
 	for (GameObject* obj : objectList)
