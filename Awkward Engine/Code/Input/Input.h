@@ -12,6 +12,31 @@ namespace Input
 		Right = 2,
 	};
 
+	//-----------------
+	// General Utility
+	//-----------------
+
+	void displayMouseCursor(bool enabled);
+
+
+
+	//---------
+	// Getters
+	//---------
+
+	// Returns true if any Key is currently hold down Includes Keyboard, Controller and Mouse input.
+	bool getAnyKey();
+
+	// Returns true if any Key got released during the last frame. Includes Keyboard, Controller and Mouse input.
+	bool getAnyKeyUp();
+
+	// Returns true if any Key got pressed. Includes Keyboard, Controller and Mouse input.
+	bool getAnyKeyDown();
+
+
+	// Keyboard
+	//----------
+
 	// Returns true if the given Key is currently hold down.
 	bool getKey(SDL_Scancode scancode);
 
@@ -20,6 +45,10 @@ namespace Input
 	
 	// Returns true if the given Key got pushed.
 	bool getKeyDown(SDL_Scancode scancode);
+
+
+	// Mouse Stuff
+	//-------------
 
 	//  Returns the current X Position of the Mouse.
 	int getMousePositionX();
@@ -36,10 +65,27 @@ namespace Input
 	// Returns true if the given mouseButton got pressed.
 	bool getMouseDown(MouseButton button);
 
-	void displayMouseCursor(bool enabled);
+
+	// Controller Stuff
+	//------------------
+
+	// Returns the Position of the given controller axis in Range [-1,1]
+	float getControllerAxis(int controller, SDL_GameControllerAxis axis);
+
+	// Returns true while the button on the given controller is held down.
+	bool getControllerButton(int controller, SDL_GameControllerBindType button);
+
+	// Returns true in the frame the given button is released.
+	bool getControllerButtonUp(int controller, SDL_GameControllerBindType button);
+
+	// Returns true in the frame the given button is pressed.
+	bool getControllerButtonDown(int controller, SDL_GameControllerBindType button);
 
 
-	// ---- Do Not touch these!
+
+	//------------------------------
+	// Stuff thats called by Game.h
+	//------------------------------
 
 	// Initializes the Controllers.
 	// Needs to be called once before the Game Loop starts if you wan't to query Controller Input.

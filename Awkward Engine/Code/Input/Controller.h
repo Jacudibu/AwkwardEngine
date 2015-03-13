@@ -44,4 +44,33 @@ struct Controller
 		haptic = nullptr;
 		printf("Controller destroyed!");
 	}
+
+	void Rumble(float intensity, int duration)
+	{
+		SDL_HapticRumblePlay(haptic, intensity, duration);
+	}
+	void StopRumble()
+	{
+		SDL_HapticRumbleStop(haptic);
+	}
+
+	float getAxis(SDL_GameControllerAxis axis)
+	{
+		if (SDL_GameControllerGetAxis(controller, axis) > 8000 || SDL_GameControllerGetAxis(controller, axis) < -8000)
+			return ((float)SDL_GameControllerGetAxis(controller, axis) / 32767.0f);
+		else
+			return 0;
+	}
+	bool getButton(SDL_GameControllerBindType button)
+	{
+		return buttonStates[button].Key;
+	}
+	bool getButtonUp(SDL_GameControllerBindType button)
+	{
+		return buttonStates[button].KeyUp;
+	}
+	bool getButtonDown(SDL_GameControllerBindType button)
+	{
+		return buttonStates[button].KeyDown;
+	}
 };

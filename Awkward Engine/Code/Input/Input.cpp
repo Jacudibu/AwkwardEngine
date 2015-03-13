@@ -14,6 +14,9 @@ namespace Input
 		MouseState mouseState;
 		std::vector<Controller*> controllers;
 
+		bool anyKeyDown, anyKeyUp;
+		int  anyKey; // as long as anyKey equals 0, no Key is pressed. Increment on keyDown, decrement on keyUp.
+
 		// forward_lists with Stuff thats going to be reset in the next frame.
 		std::forward_list<int> keyUpRemovals;
 		std::forward_list<int> keyDownRemovals;
@@ -31,12 +34,16 @@ namespace Input
 			keyStates[e.key.keysym.scancode].KeyDown = true;
 			keyStates[e.key.keysym.scancode].Key = true;
 			keyDownRemovals.push_front(e.key.keysym.scancode);
+			anyKeyDown = true;
+			anyKey++;
 		}
 		void handleKeyUp(SDL_Event e)
 		{
 			keyStates[e.key.keysym.scancode].KeyUp = true;
 			keyStates[e.key.keysym.scancode].Key = false;
 			keyUpRemovals.push_front(e.key.keysym.scancode);
+			anyKeyUp = true;
+			anyKey--;
 		}
 
 			//Mouse:
@@ -49,11 +56,15 @@ namespace Input
 		{
 			mouseState.Buttons[e.button.button - 1].KeyDown = true;
 			mouseState.Buttons[e.button.button - 1].Key = true;
+			anyKeyDown = true;
+			anyKey++;
 		}
 		void handleMouseButtonUp(SDL_Event e)
 		{
 			mouseState.Buttons[e.button.button - 1].KeyUp = true;
 			mouseState.Buttons[e.button.button - 1].Key = false;
+			anyKeyUp = true;
+			anyKey--;
 		}
 		void handleMouseWheel(SDL_Event e)
 		{
@@ -74,12 +85,16 @@ namespace Input
 			controllers[e.cbutton.which]->buttonStates[e.cbutton.button].KeyDown = true;
 			controllers[e.cbutton.which]->buttonStates[e.cbutton.button].Key = true;
 			buttonDownRemovals.push_front({ e.cbutton.which , e.cbutton.button });
+			anyKeyDown = true;
+			anyKey++;
 		}
 		void handleControllerButtonUp(SDL_Event e)
 		{
 			controllers[e.cbutton.which]->buttonStates[e.cbutton.button].KeyUp = true;
 			controllers[e.cbutton.which]->buttonStates[e.cbutton.button].Key = false;
 			buttonUpRemovals.push_front({ e.cbutton.which, e.cbutton.button });
+			anyKeyUp = true;
+			anyKey--;
 		}
 		void handleControllerAxisMotion(SDL_Event e)
 		{
@@ -125,6 +140,20 @@ namespace Input
 		}
 	}
 
+	// GETTERS
+
+	bool getAnyKey()
+	{
+		return anyKey != 0;
+	}
+	bool getAnyKeyUp()
+	{
+		return anyKeyUp;
+	}
+	bool getAnyKeyDown()
+	{
+		return anyKeyDown;
+	}
 
 	bool getKey(SDL_Scancode scancode)
 	{
@@ -159,6 +188,24 @@ namespace Input
 	{
 		return mouseState.y;
 	}
+
+	float getControllerAxis(int controller, SDL_GameControllerAxis axis)
+	{
+		return controllers[controller]->getAxis(axis);
+	}
+	bool getControllerButton(int controller, SDL_GameControllerBindType button)
+	{
+		return controllers[controller]->getButton(button);
+	}
+	bool getControllerButtonUp(int controller, SDL_GameControllerBindType button)
+	{
+		return controllers[controller]->getButtonUp(button);
+	}
+	bool getControllerButtonDown(int controller, SDL_GameControllerBindType button)
+	{
+		return controllers[controller]->getButtonDown(button);
+	}
+
 
 	void displayMouseCursor(bool enabled)
 	{
@@ -208,6 +255,9 @@ namespace Input
 			controllers[i.first]->buttonStates[i.second].KeyDown = false;
 		}
 		keyDownRemovals.clear();
+
+		anyKeyDown = false;
+		anyKeyUp = false;
 	}
 
 	void HandleEvent(SDL_Event e)
