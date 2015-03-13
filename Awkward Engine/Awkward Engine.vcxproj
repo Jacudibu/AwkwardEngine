@@ -26,6 +26,7 @@
     <ClCompile Include="Code\Renderer\Texture.cpp" />
     <ClCompile Include="Code\Renderer\Window.cpp" />
     <ClCompile Include="Code\Utility\aMath.cpp" />
+    <ClCompile Include="Code\Utility\Config.cpp" />
     <ClCompile Include="Code\Utility\ResourceManager.cpp" />
     <ClCompile Include="Code\Utility\Time.cpp" />
     <ClCompile Include="Code\Utility\Vector2.cpp" />
@@ -50,6 +51,7 @@
     <ClInclude Include="Code\Renderer\Texture.h" />
     <ClInclude Include="Code\Renderer\Window.h" />
     <ClInclude Include="Code\Utility\aMath.h" />
+    <ClInclude Include="Code\Utility\Config.h" />
     <ClInclude Include="Code\Utility\ResourceManager.h" />
     <ClInclude Include="Code\Utility\Time.h" />
     <ClInclude Include="Code\Utility\Vector2.h" />

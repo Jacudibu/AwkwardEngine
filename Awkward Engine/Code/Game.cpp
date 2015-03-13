@@ -16,6 +16,7 @@
 #include "Renderer/Window.h"
 #include "Utility/Time.h"
 #include "Utility/ResourceManager.h"
+#include "Utility/Config.h"
 #include "Audio/Music.h"
 #include "Audio/Sound.h"
 
@@ -33,6 +34,8 @@ GameObject* arrowObject;
 GameObject* fpsObject;
 GameObject* soundObject;
 Camera* cam;
+
+Config* config;
 
 SDL_GameController* GameController = NULL;
 
@@ -67,10 +70,18 @@ bool init()
 		return false;
 	}
 
+	// Load config
+	config = new Config();
+	config->load();
+
 	// Initialize Controllers
 	Input::Init();
 
-	gWindow = new Window(SCREEN_WIDTH, SCREEN_HEIGHT, "Awkward Engine Version 0.0.0.0.0.0.0.0.1f", SDL_RENDERER_ACCELERATED /*| SDL_RENDERER_PRESENTVSYNC*/);
+	gWindow = new Window(atoi(config->query("screenwidth").c_str()),
+						 atoi(config->query("screenheight").c_str()),
+						 "Awkward Engine Version " + config->query("version"),
+						 SDL_RENDERER_ACCELERATED /*| SDL_RENDERER_PRESENTVSYNC*/);
+
 	cam = new Camera(gWindow, nullptr);
 	renderLayer = new RenderLayer();
 	cam->addLayer(renderLayer);
@@ -128,6 +139,10 @@ void close()
 	// Destroy window
 	delete gWindow;
 	gWindow   = nullptr;
+
+	// Destroy Config
+	delete config;
+	config = nullptr;
 
 	// Quit SDL subysystems
 	Mix_Quit();
