@@ -20,13 +20,8 @@
 #include "Audio/Music.h"
 #include "Audio/Sound.h"
 
-// Screen dimension constants - #TODO: Put these into superfancy config files!
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
-
 Window*  gWindow = nullptr;
 TTF_Font* gFont = nullptr;
-
 
 RenderLayer* renderLayer;
 GameObject* mousePointer;
@@ -36,6 +31,8 @@ GameObject* soundObject;
 Camera* cam;
 
 Config* config;
+
+bool quit;
 
 SDL_GameController* GameController = NULL;
 
@@ -77,8 +74,8 @@ bool init()
 	// Initialize Controllers
 	Input::Init();
 
-	gWindow = new Window(atoi(config->query("screenwidth").c_str()),
-						 atoi(config->query("screenheight").c_str()),
+	gWindow = new Window(config->getScreenWidth(),
+						 config->getScreenHeight(),
 						 "Awkward Engine Version " + config->query("version"),
 						 SDL_RENDERER_ACCELERATED /*| SDL_RENDERER_PRESENTVSYNC*/);
 
@@ -93,7 +90,6 @@ bool loadMedia()
 {
 	// Loading success flag
 	bool success = true;
-
 	// open Font
 	gFont = TTF_OpenFont("resources/arial.ttf", 28);
 	if (gFont == nullptr)
@@ -113,10 +109,10 @@ bool loadMedia()
 	mousePointer->addComponent(new SpriteRenderer("resources/cursor.png", renderLayer, 1, 2, 1));
 	
 	arrowObject->addComponent(new SpriteRenderer("resources/alphaArrow.png", renderLayer));
-	arrowObject->transform->Position = { SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0 };
+	arrowObject->transform->Position = { (float) config->getScreenWidth() / 2, (float) config->getScreenHeight() / 2, 0 };
 
 	fpsObject->addComponent(new TextRenderer("", renderLayer, { 0x0, 0x0, 0x0, 0xFF }));
-	fpsObject->transform->Position = { SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0 };
+	fpsObject->transform->Position = { (float) config->getScreenWidth() / 2, (float) config->getScreenHeight() / 2, 0 };
 
 	return success;
 }
@@ -151,6 +147,28 @@ void close()
 	SDL_Quit();
 }
 
+void handleEvents()
+{
+	// Handle events on queue
+	// Reset Input first.
+	Input::RemoveKeyUpDownFlags();
+	SDL_Event e;
+
+	while (SDL_PollEvent(&e) != NULL)
+	{
+		switch (e.type)
+		{
+		case SDL_QUIT:
+			quit = true;
+			break;
+		default:	// No Event thats handled by the Game Loop, most likely Input. So let's send it to Input.
+			Input::HandleEvent(e);
+			break;
+		}
+	}
+
+}
+
 int main(int argc, char* args[])
 {
 	// Start up SDL and create window
@@ -167,8 +185,7 @@ int main(int argc, char* args[])
 			return -1;
 		}
 		
-		bool quit = false;
-		SDL_Event e;
+		quit = false;
 
 		float degrees = 0;
 		SDL_RendererFlip flipType = SDL_FLIP_NONE;
@@ -184,23 +201,8 @@ int main(int argc, char* args[])
 			// Update Time
 			Time::Update();
 
-			// Handle events on queue
-				// Reset Input first.
-			Input::RemoveKeyUpDownFlags();
+			handleEvents();
 
-			while (SDL_PollEvent(&e) != NULL)
-			{
-				switch (e.type)
-				{
-				case SDL_QUIT:
-					quit = true;
-					break;
-				default:	// No Event thats handled by the Game Loop, most likely Input. So let's send it to Input.
-					Input::HandleEvent(e);
-					break;
-				}
-			}
-			
 			if (Input::getKey(SDL_SCANCODE_A) || Input::getMouse(Input::MouseButton::Left))
 				degrees -= 1 * Time::getDeltaTime() * 100.0f;
 			if (Input::getKey(SDL_SCANCODE_D) || Input::getMouse(Input::MouseButton::Right))

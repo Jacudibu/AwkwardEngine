@@ -21,9 +21,15 @@ public:
 	// Returns the string associated with the key
 	std::string query(std::string id);
 
+	// Getters for important values
+	inline int getScreenWidth() { return screenwidth; }
+	inline int getScreenHeight() { return screenheight; }
 
 private:
 	std::map<std::string, const std::string> data;
 
 	std::string path = "config.ini";
+
+	int screenwidth;
+	int screenheight;
 };

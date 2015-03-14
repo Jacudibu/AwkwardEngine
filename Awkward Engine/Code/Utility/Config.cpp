@@ -16,6 +16,10 @@ void Config::load()
 				(line.substr(0, posOfEquals),
 				 line.substr(posOfEquals + 1)));
 		}
+
+		// Set values that are obvious enough to get direct access
+		screenheight = atoi(data.find("screenheight")->second.c_str());
+		screenwidth = atoi(data.find("screenwidth")->second.c_str());
 	}
 	else
 	{
