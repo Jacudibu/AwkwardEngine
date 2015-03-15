@@ -188,6 +188,7 @@ int main(int argc, char* args[])
 		quit = false;
 
 		float degrees = 0;
+		float degreeOffset = 0;
 		SDL_RendererFlip flipType = SDL_FLIP_NONE;
 
 		float mousePointerStep = 0.0f;
@@ -204,9 +205,9 @@ int main(int argc, char* args[])
 			handleEvents();
 
 			if (Input::getKey(SDL_SCANCODE_A) || Input::getMouse(Input::MouseButton::Left))
-				degrees -= 1 * Time::getDeltaTime() * 100.0f;
+				degreeOffset -= 1 * Time::getDeltaTime() * 100.0f;
 			if (Input::getKey(SDL_SCANCODE_D) || Input::getMouse(Input::MouseButton::Right))
-				degrees += 1 * Time::getDeltaTime() * 100.0f;
+				degreeOffset += 1 * Time::getDeltaTime() * 100.0f;
 			if (Input::getKeyDown(SDL_SCANCODE_Q))
 				flipType = SDL_FLIP_HORIZONTAL;
 			if (Input::getKeyDown(SDL_SCANCODE_W))
@@ -243,19 +244,22 @@ int main(int argc, char* args[])
 			((SpriteRenderer*)arrowObject->getComponent("SpriteRenderer"))->flip = flipType;
 			((TextRenderer*)fpsObject->getComponent("TextRenderer"))->flip = flipType;
 
-			fpsObject->transform->Rotation = degrees;
-			arrowObject->transform->Rotation = degrees;
+			degrees = Vector3::Angle2D({cam->transform->Position.x + config->getScreenWidth() / 2,
+									 		cam->transform->Position.y + config->getScreenHeight() / 2,
+									 		cam->transform->Position.z
+											}, mousePointer->transform->Position);
+			//printf("Angle: %f\n", degrees);
+			
+			fpsObject->transform->Rotation = degrees + degreeOffset;
+			arrowObject->transform->Rotation = degrees + degreeOffset;
 
 			// Render current frame
 
 			gWindow->Render();
-
-			// Update Surface
-			//SDL_RenderPresent(gRenderer);
 		}
 	}
 
-	// Wait a seccond before Exiting. Makes it more dramatic.
+	// Wait a second before Exiting. Makes pressing that red X more dramatic.
 	SDL_Delay(1000);
 
 	// Free resources

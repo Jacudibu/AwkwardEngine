@@ -26,6 +26,9 @@ struct Vector3
 	// Cross product of Vector a and Vector b
 	static Vector3 Cross(Vector3 a, Vector3 b);
 
+	// Returns the Angle of the two Vectors in 2D Space in Degrees.
+	static float Angle2D(Vector3 a, Vector3 b);
+
 	// Overloaded Operands to play with.
 	Vector3 &operator+=(const Vector3 &other);
 	Vector3 &operator-=(const Vector3 &other);

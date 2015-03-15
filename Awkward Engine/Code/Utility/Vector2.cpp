@@ -35,6 +35,14 @@ float Vector2::Dot(Vector2 a, Vector2 b)
 	return (a.x * b.x + a.y * b.y);
 }
 
+float Vector2::Angle(Vector2 a, Vector2 b)
+{
+	//                    DeltaY     DeltaX     Convert Radians to Degrees
+	return (float) (atan2(b.y - a.y, b.x - a.x) * 180 / M_PI);
+}
+
+
+
 // Overloaded Operands.
 Vector2 &Vector2::operator+=(const Vector2 &other)
 {

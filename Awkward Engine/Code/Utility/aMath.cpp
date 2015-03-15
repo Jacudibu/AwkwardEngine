@@ -1,8 +1,4 @@
 #include "aMath.h"
-
-#define _USE_MATH_DEFINES
-
-#include <cmath>
 #include <math.h>
 
 namespace aMath

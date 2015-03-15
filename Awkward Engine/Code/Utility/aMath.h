@@ -1,6 +1,8 @@
+#define _USE_MATH_DEFINES
+#include <cmath>
+
 // aMath
 // A namespace containing awkward Math related functions.
-
 namespace aMath
 {
 	// Clamp

@@ -24,6 +24,9 @@ struct Vector2
 	// Dot product of Vector a and Vector b
 	static float Dot(Vector2 a, Vector2 b);
 
+	// Returns the Angle between a and b in Degrees.
+	static float Angle(Vector2 a, Vector2 b);
+
 	// Overloaded Operands to play with.
 	Vector2 &operator+=(const Vector2 &other);
 	Vector2 &operator-=(const Vector2 &other);

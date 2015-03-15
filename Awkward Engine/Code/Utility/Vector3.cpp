@@ -39,6 +39,12 @@ Vector3 Vector3::Cross(Vector3 a, Vector3 b)
 	return {a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y - b.x};
 }
 
+float Vector3::Angle2D(Vector3 a, Vector3 b)
+{
+	//                    DeltaY     DeltaX     Convert Radians to Degrees
+	return (float) (atan2(b.y - a.y, b.x - a.x) * 180 / M_PI);
+}
+
 Vector3 Vector3::Normalized()
 {
 	return {x / (x + y + z), y / (x + y +z), z / (x + y + z)};
