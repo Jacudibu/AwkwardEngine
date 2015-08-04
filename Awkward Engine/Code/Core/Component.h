@@ -22,7 +22,8 @@ public:
 	// Returns the Component ID.
 	virtual std::string getID() {return ID;}
 
-private:
+//private:
+protected:
 	// Used to compare components for similiarity.
 	std::string ID;
 };

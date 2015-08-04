@@ -29,6 +29,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Engine\Testing">
+      <UniqueIdentifier>{fbc2e09e-fe26-4007-9042-d43530dddfdf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Input\Input.cpp">
@@ -90,6 +93,9 @@
     </ClCompile>
     <ClCompile Include="Code\Utility\Config.cpp">
       <Filter>Engine\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Testing\RotatingComponent.cpp">
+      <Filter>Engine\Testing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +167,12 @@
     </ClInclude>
     <ClInclude Include="Code\Utility\Config.h">
       <Filter>Engine\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Testing\RotatingComponent.h">
+      <Filter>Engine\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Testing\RotatorObject.h">
+      <Filter>Engine\Testing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

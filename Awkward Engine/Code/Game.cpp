@@ -20,6 +20,9 @@
 #include "Audio/Music.h"
 #include "Audio/Sound.h"
 
+
+#include "Testing/RotatorObject.h"
+
 Window*  gWindow = nullptr;
 TTF_Font* gFont = nullptr;
 
@@ -77,7 +80,7 @@ bool init()
 	gWindow = new Window(config->getScreenWidth(),
 						 config->getScreenHeight(),
 						 "Awkward Engine Version " + config->query("version"),
-						 SDL_RENDERER_ACCELERATED /*| SDL_RENDERER_PRESENTVSYNC*/);
+						 SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC/**/);
 
 	cam = new Camera(gWindow, nullptr);
 	renderLayer = new RenderLayer();
@@ -108,8 +111,11 @@ bool loadMedia()
 	soundObject->addComponent(new Sound("resources/testsounds/low.wav", 10));
 	mousePointer->addComponent(new SpriteRenderer("resources/cursor.png", renderLayer, 1, 2, 1));
 	
+	arrowObject->addComponent(new RotatingComponent());
 	arrowObject->addComponent(new SpriteRenderer("resources/alphaArrow.png", renderLayer));
 	arrowObject->transform->Position = { (float) config->getScreenWidth() / 2, (float) config->getScreenHeight() / 2, 0 };
+
+
 
 	fpsObject->addComponent(new TextRenderer("", renderLayer, { 0x0, 0x0, 0x0, 0xFF }));
 	fpsObject->transform->Position = { (float) config->getScreenWidth() / 2, (float) config->getScreenHeight() / 2, 0 };
@@ -241,7 +247,7 @@ int main(int argc, char* args[])
 			((SpriteRenderer*)mousePointer->getComponent("SpriteRenderer"))->setCurrentClip(((int)mousePointerStep % 2) + 1);
 
 			// Rotate Objects
-			((SpriteRenderer*)arrowObject->getComponent("SpriteRenderer"))->flip = flipType;
+			//((SpriteRenderer*)arrowObject->getComponent("SpriteRenderer"))->flip = flipType;
 			((TextRenderer*)fpsObject->getComponent("TextRenderer"))->flip = flipType;
 
 			degrees = Vector3::Angle2D({cam->transform->Position.x + config->getScreenWidth() / 2,
@@ -251,7 +257,8 @@ int main(int argc, char* args[])
 			//printf("Angle: %f\n", degrees);
 			
 			fpsObject->transform->Rotation = degrees + degreeOffset;
-			arrowObject->transform->Rotation = degrees + degreeOffset;
+			//arrowObject->transform->Rotation = degrees + degreeOffset;
+			arrowObject->Update();
 
 			// Render current frame
 

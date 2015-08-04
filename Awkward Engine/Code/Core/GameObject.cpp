@@ -18,6 +18,9 @@ GameObject::~GameObject()
 
 void GameObject::addComponent(Component* comp)
 {
+	if (comp == nullptr)
+		return;
+
 	// If the Component was attached to another GameObject before, remove it.
 	if (comp->gameObject != nullptr)
 		comp->gameObject->removeComponent(comp);
@@ -27,6 +30,9 @@ void GameObject::addComponent(Component* comp)
 }
 void GameObject::removeComponent(Component* comp)
 {
+	if (comp == nullptr)
+		return;
+
 	components.remove(comp);
 	comp->gameObject = nullptr;
 }
@@ -46,7 +52,7 @@ Component* GameObject::getComponent(std::string ID)
 {
 	for (Component* comp : components)
 	{
-		if (comp->getID().compare(ID) == 0)
+		if (componentHash(comp->getID()) == componentHash(ID))
 			return comp;
 	}
 

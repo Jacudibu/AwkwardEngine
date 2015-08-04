@@ -45,7 +45,7 @@ void Config::init()
 
 	SDL_RWwrite(file, &"screenwidth=640\n", sizeof("screenwidth=640\n") - 1, 1);
 	SDL_RWwrite(file, &"screenheight=480\n", sizeof("screenheight=480\n") - 1, 1);
-	SDL_RWwrite(file, &"version=0.0.0.0.0.0.0.0.1g\n", sizeof("version=0.0.0.0.0.0.0.0.1g\n") - 1, 1);
+	SDL_RWwrite(file, &"version=0.0.0.0.0.0.0.0.1h\n", sizeof("version=0.0.0.0.0.0.0.0.1h\n") - 1, 1);
 
 	SDL_RWclose(file);
 

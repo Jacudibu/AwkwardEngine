@@ -10,6 +10,8 @@ class Component;
 class GameObject
 {
 public:
+	std::hash<std::string> componentHash;
+
 	bool enabled = true;
 	Transform* transform;
 

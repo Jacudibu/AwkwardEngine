@@ -25,6 +25,7 @@
     <ClCompile Include="Code\Renderer\TextRenderer.cpp" />
     <ClCompile Include="Code\Renderer\Texture.cpp" />
     <ClCompile Include="Code\Renderer\Window.cpp" />
+    <ClCompile Include="Code\Testing\RotatingComponent.cpp" />
     <ClCompile Include="Code\Utility\aMath.cpp" />
     <ClCompile Include="Code\Utility\Config.cpp" />
     <ClCompile Include="Code\Utility\ResourceManager.cpp" />
@@ -50,6 +51,8 @@
     <ClInclude Include="Code\Renderer\TextRenderer.h" />
     <ClInclude Include="Code\Renderer\Texture.h" />
     <ClInclude Include="Code\Renderer\Window.h" />
+    <ClInclude Include="Code\Testing\RotatingComponent.h" />
+    <ClInclude Include="Code\Testing\RotatorObject.h" />
     <ClInclude Include="Code\Utility\aMath.h" />
     <ClInclude Include="Code\Utility\Config.h" />
     <ClInclude Include="Code\Utility\ResourceManager.h" />
