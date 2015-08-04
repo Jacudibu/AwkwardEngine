@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SDL.h>
-#include "..\Core\Component.h"
+#include "..\Component.h"
 #include "RenderLayer.h"
 
 class RenderLayer;

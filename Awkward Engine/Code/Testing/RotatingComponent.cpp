@@ -1,6 +1,6 @@
 #include "RotatingComponent.h"
-#include "../Input/Input.h"
-#include "../Utility/Time.h"
+#include "../Engine/Input/Input.h"
+#include "../Engine/Utility/Time.h"
 
 void RotatingComponent::Update()
 {

@@ -1,5 +1,5 @@
 #include "Texture.h"
-#include "..\Utility\ResourceManager.h"
+#include "../Utility/ResourceManager.h"
 
 Texture::Texture()
 {

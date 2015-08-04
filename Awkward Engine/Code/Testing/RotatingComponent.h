@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Core/Component.h"
-#include "../Renderer/SpriteRenderer.h"
+#include "../Engine/Component.h"
+#include "../Engine/Renderer/SpriteRenderer.h"
 
 class RotatingComponent : public Component
 {

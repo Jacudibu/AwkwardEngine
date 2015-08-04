@@ -8,17 +8,17 @@
 #include <cmath> // ????
 #include <sstream> // Used for FPS
 
-#include "Input/Input.h"
-#include "Renderer/Texture.h"
-#include "Renderer/SpriteRenderer.h"
-#include "Renderer/TextRenderer.h"
-#include "Renderer/Camera.h"
-#include "Renderer/Window.h"
-#include "Utility/Time.h"
-#include "Utility/ResourceManager.h"
-#include "Utility/Config.h"
-#include "Audio/Music.h"
-#include "Audio/Sound.h"
+#include "Engine/Input/Input.h"
+#include "Engine/Renderer/Texture.h"
+#include "Engine/Renderer/SpriteRenderer.h"
+#include "Engine/Renderer/TextRenderer.h"
+#include "Engine/Renderer/Camera.h"
+#include "Engine/Renderer/Window.h"
+#include "Engine/Utility/Time.h"
+#include "Engine/Utility/ResourceManager.h"
+#include "Engine/Utility/Config.h"
+#include "Engine/Audio/Music.h"
+#include "Engine/Audio/Sound.h"
 
 
 #include "Testing/RotatorObject.h"

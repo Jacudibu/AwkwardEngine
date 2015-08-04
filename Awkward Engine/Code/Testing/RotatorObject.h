@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Core/GameObject.h"
+#include "../Engine/GameObject.h"
 #include "RotatingComponent.h"
 
 class RotatorObject : public GameObject

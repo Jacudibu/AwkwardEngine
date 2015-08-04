@@ -1,8 +1,8 @@
 #pragma once
 
 #include "GameObject.h"
-#include "..\Utility\Vector3.h"
-#include "..\Utility\Vector2.h"
+#include "Utility\Vector3.h"
+#include "Utility\Vector2.h"
 
 
 class GameObject;

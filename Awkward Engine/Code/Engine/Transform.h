@@ -2,9 +2,9 @@
 
 #include <list>
 
-#include "..\Utility\Vector3.h"
-#include "..\Utility\Vector2.h"
-#include "..\Core\GameObject.h"
+#include "Utility\Vector3.h"
+#include "Utility\Vector2.h"
+#include "GameObject.h"
 
 class GameObject;
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SDL.h>
-#include "..\Core\Transform.h"
+#include "../Transform.h"
 #include "RenderLayer.h"
 #include "Window.h"
 

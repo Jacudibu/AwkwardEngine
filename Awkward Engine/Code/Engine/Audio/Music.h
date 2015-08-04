@@ -2,7 +2,7 @@
 
 #include <SDL_mixer.h>
 #include <string>
-#include "..\Core\Component.h"
+#include "..\Component.h"
 
 // Music is streamed, meaning it performs great with large files (like background music)
 // As a drawback, you can only play one music at a time. So choose wisely.

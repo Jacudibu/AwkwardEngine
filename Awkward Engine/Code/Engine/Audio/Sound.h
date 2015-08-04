@@ -2,7 +2,7 @@
 
 #include <SDL_mixer.h>
 #include <string>
-#include "..\Core\Component.h"
+#include "..\Component.h"
 
 // Use this for Sound Effects.
 class Sound : public Component

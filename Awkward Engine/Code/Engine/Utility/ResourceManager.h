@@ -13,7 +13,7 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
-#include "..\Renderer\Texture.h"
+#include "../Renderer/Texture.h"
 
 namespace ResourceManager
 {
