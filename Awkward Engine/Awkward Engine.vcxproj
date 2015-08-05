@@ -62,6 +62,7 @@
     <ClInclude Include="Code\Engine\Utility\Time.h" />
     <ClInclude Include="Code\Engine\Utility\Vector2.h" />
     <ClInclude Include="Code\Engine\Utility\Vector3.h" />
+    <ClInclude Include="Code\Testing\TestingScene.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{638FE49C-9AD9-4B1E-A4ED-0FAAB9AB630B}</ProjectGuid>

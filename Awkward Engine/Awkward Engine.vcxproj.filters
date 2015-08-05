@@ -173,5 +173,6 @@
     <ClInclude Include="Code\Testing\MouseComponent.h" />
     <ClInclude Include="Code\Testing\RotateToMouseCursorComponent.h" />
     <ClInclude Include="Code\Testing\PlaySoundOnButtonPressComponent.h" />
+    <ClInclude Include="Code\Testing\TestingScene.h" />
   </ItemGroup>
 </Project>

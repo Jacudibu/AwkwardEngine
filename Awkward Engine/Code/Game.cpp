@@ -7,36 +7,37 @@
 #include <string> // Used for filenames
 #include <cmath> // ????
 
+#include "Engine/Scene.h"
+
 #include "Engine/Input/Input.h"
+
 #include "Engine/Renderer/Texture.h"
 #include "Engine/Renderer/SpriteRenderer.h"
 #include "Engine/Renderer/TextRenderer.h"
 #include "Engine/Renderer/Camera.h"
 #include "Engine/Renderer/Window.h"
+
 #include "Engine/Utility/Time.h"
 #include "Engine/Utility/ResourceManager.h"
 #include "Engine/Utility/Config.h"
+
 #include "Engine/Audio/Music.h"
 #include "Engine/Audio/Sound.h"
 
-#include "Testing/RotatingComponent.h"
-#include "Testing/FPSTextUpdateComponent.h"
-#include "Testing/MoveCameraComponent.h"
-#include "Testing/MouseComponent.h"
-#include "Testing/RotateToMouseCursorComponent.h"
-#include "Testing/PlaySoundOnButtonPressComponent.h"
+#include "Testing/TestingScene.h"
 
 Window*  gWindow = nullptr;
 TTF_Font* gFont = nullptr;
 
 RenderLayer* renderLayer;
-GameObject* mouseObject;
-GameObject* awkwardLogoObject;
-GameObject* fpsObject;
-GameObject* soundObject;
 Camera* cam;
 
+Scene* currentScene;
+
 Config* config;
+
+
+
 
 bool quit;
 
@@ -75,8 +76,6 @@ bool init()
 		return false;
 	}
 
-
-
 	// Load config
 	config = new Config();
 	config->load();
@@ -109,39 +108,13 @@ bool loadMedia()
 	}
 	TextRenderer::font = gFont;
 
-
-	mouseObject = new GameObject();
-	awkwardLogoObject = new GameObject();
-	fpsObject = new GameObject();
-	soundObject = new GameObject();
-
-	soundObject->addComponent(new Sound("resources/testsounds/punch.wav", 128));
-	soundObject->addComponent(new PlaySoundOnButtonPressComponent());
-
-	mouseObject->addComponent(new SpriteRenderer("resources/cursor.png", renderLayer, 1, 2, 1));
-	mouseObject->addComponent(new MouseComponent(cam));
-
-	awkwardLogoObject->transform->Position = { (float)config->getScreenWidth() / 2, (float)config->getScreenHeight() / 2, 0 };
-	awkwardLogoObject->addComponent(new RotatingComponent());
-	awkwardLogoObject->addComponent(new SpriteRenderer("resources/awkwardLogo.png", renderLayer));
-
-	fpsObject->addComponent(new TextRenderer("FPS", renderLayer, { 0x0, 0x0, 0x0, 0xFF }));
-	fpsObject->addComponent(new FPSTextUpdateComponent());
-	fpsObject->addComponent(new RotateToMouseCursorComponent(cam, config, mouseObject));
-	fpsObject->transform->Position = { (float) config->getScreenWidth() / 2, (float) config->getScreenHeight() / 2, 0 };
-
-	cam->addComponent(new MoveCameraComponent());
-
 	return success;
 }
 
 void close()
 {
-	// Delete Game Objects
-	delete mouseObject;
-	delete awkwardLogoObject;
-	delete fpsObject;
-	delete soundObject;
+	// Destroy Scene
+	delete currentScene;
 
 	// Close Controllers
 	Input::Shutdown();
@@ -207,20 +180,18 @@ int main(int argc, char* args[])
 
 		Input::displayMouseCursor(false);
 
+		// Load starting Scene
+		currentScene = new TestingScene(cam, config, renderLayer);
+
 		while (!quit)
 		{
 			Time::Update();
 			handleEvents();
 
 			// Update Calls
-			awkwardLogoObject->Update();
-			fpsObject->Update();
+			currentScene->Update();
+
 			cam->Update();
-			mouseObject->Update();
-			soundObject->Update();
-
-
-
 
 			// Render current frame
 			gWindow->Render();

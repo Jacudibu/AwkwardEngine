@@ -1,8 +1,12 @@
 #include "Scene.h"
 
-Scene::Scene()
+Scene::Scene(Camera* camera, Config* configs, RenderLayer* layer)
 {
-	// Currently does nothing. Thats boring.
+	cam = camera;
+	config = configs;
+	renderLayer = layer;
+
+	Init();
 }
 
 Scene::~Scene()
