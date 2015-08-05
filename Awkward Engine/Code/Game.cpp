@@ -6,7 +6,6 @@
 #include <stdio.h> // Used for printf
 #include <string> // Used for filenames
 #include <cmath> // ????
-#include <sstream> // Used for FPS
 
 #include "Engine/Input/Input.h"
 #include "Engine/Renderer/Texture.h"
@@ -20,15 +19,19 @@
 #include "Engine/Audio/Music.h"
 #include "Engine/Audio/Sound.h"
 
-
-#include "Testing/RotatorObject.h"
+#include "Testing/RotatingComponent.h"
+#include "Testing/FPSTextUpdateComponent.h"
+#include "Testing/MoveCameraComponent.h"
+#include "Testing/MouseComponent.h"
+#include "Testing/RotateToMouseCursorComponent.h"
+#include "Testing/PlaySoundOnButtonPressComponent.h"
 
 Window*  gWindow = nullptr;
 TTF_Font* gFont = nullptr;
 
 RenderLayer* renderLayer;
-GameObject* mousePointer;
-GameObject* arrowObject;
+GameObject* mouseObject;
+GameObject* awkwardLogoObject;
 GameObject* fpsObject;
 GameObject* soundObject;
 Camera* cam;
@@ -64,11 +67,15 @@ bool init()
 	}
 
 	// Initialize SDL_mixer
+	Mix_Init(MIX_INIT_MP3);
+
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
 	{
 		printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
 		return false;
 	}
+
+
 
 	// Load config
 	config = new Config();
@@ -80,7 +87,7 @@ bool init()
 	gWindow = new Window(config->getScreenWidth(),
 						 config->getScreenHeight(),
 						 "Awkward Engine Version " + config->query("version"),
-						 SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC/**/);
+						 SDL_RENDERER_ACCELERATED );//| SDL_RENDERER_PRESENTVSYNC/**/);
 
 	cam = new Camera(gWindow, nullptr);
 	renderLayer = new RenderLayer();
@@ -103,22 +110,27 @@ bool loadMedia()
 	TextRenderer::font = gFont;
 
 
-	mousePointer = new GameObject();
-	arrowObject = new GameObject();
+	mouseObject = new GameObject();
+	awkwardLogoObject = new GameObject();
 	fpsObject = new GameObject();
 	soundObject = new GameObject();
 
-	soundObject->addComponent(new Sound("resources/testsounds/low.wav", 10));
-	mousePointer->addComponent(new SpriteRenderer("resources/cursor.png", renderLayer, 1, 2, 1));
-	
-	arrowObject->addComponent(new RotatingComponent());
-	arrowObject->addComponent(new SpriteRenderer("resources/alphaArrow.png", renderLayer));
-	arrowObject->transform->Position = { (float) config->getScreenWidth() / 2, (float) config->getScreenHeight() / 2, 0 };
+	soundObject->addComponent(new Sound("resources/testsounds/punch.wav", 128));
+	soundObject->addComponent(new PlaySoundOnButtonPressComponent());
 
+	mouseObject->addComponent(new SpriteRenderer("resources/cursor.png", renderLayer, 1, 2, 1));
+	mouseObject->addComponent(new MouseComponent(cam));
 
+	awkwardLogoObject->transform->Position = { (float)config->getScreenWidth() / 2, (float)config->getScreenHeight() / 2, 0 };
+	awkwardLogoObject->addComponent(new RotatingComponent());
+	awkwardLogoObject->addComponent(new SpriteRenderer("resources/awkwardLogo.png", renderLayer));
 
-	fpsObject->addComponent(new TextRenderer("", renderLayer, { 0x0, 0x0, 0x0, 0xFF }));
+	fpsObject->addComponent(new TextRenderer("FPS", renderLayer, { 0x0, 0x0, 0x0, 0xFF }));
+	fpsObject->addComponent(new FPSTextUpdateComponent());
+	fpsObject->addComponent(new RotateToMouseCursorComponent(cam, config, mouseObject));
 	fpsObject->transform->Position = { (float) config->getScreenWidth() / 2, (float) config->getScreenHeight() / 2, 0 };
+
+	cam->addComponent(new MoveCameraComponent());
 
 	return success;
 }
@@ -126,8 +138,8 @@ bool loadMedia()
 void close()
 {
 	// Delete Game Objects
-	delete mousePointer;
-	delete arrowObject;
+	delete mouseObject;
+	delete awkwardLogoObject;
 	delete fpsObject;
 	delete soundObject;
 
@@ -193,81 +205,30 @@ int main(int argc, char* args[])
 		
 		quit = false;
 
-		float degrees = 0;
-		float degreeOffset = 0;
-		SDL_RendererFlip flipType = SDL_FLIP_NONE;
-
-		float mousePointerStep = 0.0f;
 		Input::displayMouseCursor(false);
-
-		// Variables for FPS
-		std::stringstream timeText;
 
 		while (!quit)
 		{
-			// Update Time
 			Time::Update();
-
 			handleEvents();
 
-			if (Input::getKey(SDL_SCANCODE_A) || Input::getMouse(Input::MouseButton::Left))
-				degreeOffset -= 1 * Time::getDeltaTime() * 100.0f;
-			if (Input::getKey(SDL_SCANCODE_D) || Input::getMouse(Input::MouseButton::Right))
-				degreeOffset += 1 * Time::getDeltaTime() * 100.0f;
-			if (Input::getKeyDown(SDL_SCANCODE_Q))
-				flipType = SDL_FLIP_HORIZONTAL;
-			if (Input::getKeyDown(SDL_SCANCODE_W))
-				flipType = SDL_FLIP_NONE;
-			if (Input::getKeyDown(SDL_SCANCODE_E))
-				flipType = SDL_FLIP_VERTICAL;
-			if (Input::getKeyDown(SDL_SCANCODE_U))
-				((Sound*)soundObject->getComponent("Sound"))->Play();
-			if (Input::getKey(SDL_SCANCODE_DOWN))
-				cam->transform->Position.y--;
-			if (Input::getKey(SDL_SCANCODE_UP))
-				cam->transform->Position.y++;
-			if (Input::getKey(SDL_SCANCODE_RIGHT))
-				cam->transform->Position.x--;
-			if (Input::getKey(SDL_SCANCODE_LEFT))
-				cam->transform->Position.x++;
+			// Update Calls
+			awkwardLogoObject->Update();
+			fpsObject->Update();
+			cam->Update();
+			mouseObject->Update();
+			soundObject->Update();
 
-			// Set text to be rendered
-			timeText.str("");
-			timeText << "FPS: " << Time::getFPS();
 
-			// Adjust fps text
-			((TextRenderer*)fpsObject->getComponent("TextRenderer"))->setText(timeText.str());
 
-			// Change mouse cursor
-			mousePointer->transform->Position = { (float)Input::getMousePositionX(), (float)Input::getMousePositionY(), 0.0f };
-			mousePointer->transform->Position -= cam->transform->Position;
-
-			mousePointerStep += Time::getDeltaTime();
-
-			((SpriteRenderer*)mousePointer->getComponent("SpriteRenderer"))->setCurrentClip(((int)mousePointerStep % 2) + 1);
-
-			// Rotate Objects
-			//((SpriteRenderer*)arrowObject->getComponent("SpriteRenderer"))->flip = flipType;
-			((TextRenderer*)fpsObject->getComponent("TextRenderer"))->flip = flipType;
-
-			degrees = Vector3::Angle2D({cam->transform->Position.x + config->getScreenWidth() / 2,
-									 		cam->transform->Position.y + config->getScreenHeight() / 2,
-									 		cam->transform->Position.z
-											}, mousePointer->transform->Position);
-			//printf("Angle: %f\n", degrees);
-			
-			fpsObject->transform->Rotation = degrees + degreeOffset;
-			//arrowObject->transform->Rotation = degrees + degreeOffset;
-			arrowObject->Update();
 
 			// Render current frame
-
 			gWindow->Render();
 		}
 	}
 
-	// Wait a second before Exiting. Makes pressing that red X more dramatic.
-	SDL_Delay(1000);
+	// Wait a millisecond before Exiting. Makes pressing that red X more dramatic.
+	SDL_Delay(100);
 
 	// Free resources
 	close();

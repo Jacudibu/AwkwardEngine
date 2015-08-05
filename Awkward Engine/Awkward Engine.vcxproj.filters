@@ -37,9 +37,6 @@
     <ClCompile Include="Code\Game.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Testing\RotatingComponent.cpp">
-      <Filter>Engine\Testing</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Engine\Audio\Music.cpp">
       <Filter>Engine\Audio</Filter>
     </ClCompile>
@@ -100,9 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Testing\RotatingComponent.h">
-      <Filter>Engine\Testing</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Testing\RotatorObject.h">
       <Filter>Engine\Testing</Filter>
     </ClInclude>
     <ClInclude Include="Code\Engine\Audio\Music.h">
@@ -174,5 +168,10 @@
     <ClInclude Include="Code\Engine\Renderer\Camera.h">
       <Filter>Engine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Testing\FPSTextUpdateComponent.h" />
+    <ClInclude Include="Code\Testing\MoveCameraComponent.h" />
+    <ClInclude Include="Code\Testing\MouseComponent.h" />
+    <ClInclude Include="Code\Testing\RotateToMouseCursorComponent.h" />
+    <ClInclude Include="Code\Testing\PlaySoundOnButtonPressComponent.h" />
   </ItemGroup>
 </Project>

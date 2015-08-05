@@ -21,6 +21,12 @@ void GameObject::addComponent(Component* comp)
 	if (comp == nullptr)
 		return;
 
+	// Check wether the component's Type is set up
+	#ifdef _DEBUG
+	if (comp->getID() == "")
+		printf("WARNING: Added Component without ID to GameObject! GetComponent won't work now!");
+	#endif
+
 	// If the Component was attached to another GameObject before, remove it.
 	if (comp->gameObject != nullptr)
 		comp->gameObject->removeComponent(comp);

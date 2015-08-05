@@ -69,6 +69,9 @@ namespace ResourceManager
 			SoundWithCount newSound;
 
 			newSound.sound = Mix_LoadWAV(path.c_str());
+
+
+
 			if (newSound.sound == nullptr)
 			{
 				printf("Failed to load Sound file at path %s - SDL_mixer Error: %s", path, Mix_GetError());
@@ -123,7 +126,7 @@ namespace ResourceManager
 		}
 		else
 		{
-			printf("Can't unload Texture at %s, seems to not being loaded!", path);
+			printf("Can't unload Texture at %s, seems to not being loaded!", path.c_str());
 		}
 	}
 	void unloadSound(std::string path)
@@ -139,7 +142,7 @@ namespace ResourceManager
 		}
 		else
 		{
-			printf("Can't unload Sound at %s, seems to not being loaded!", path);
+			printf("Can't unload Sound at %s, seems to not being loaded!", path.c_str());
 		}
 	}
 	void unloadMusic(std::string path)
@@ -155,7 +158,7 @@ namespace ResourceManager
 		}
 		else
 		{
-			printf("Can't unload Music at %s, seems to not being loaded!", path);
+			printf("Can't unload Music at %s, seems to not being loaded!", path.c_str());
 		}
 		
 

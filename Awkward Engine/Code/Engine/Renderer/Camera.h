@@ -8,14 +8,11 @@
 class RenderLayer;
 class Window;
 
-class Camera
+class Camera : public GameObject
 {
 public:
 	Camera(Window* win, SDL_Rect* viewport);
 	~Camera();
-
-	bool enabled = true;
-	Transform* transform;
 
 	// Sets the ViewPort of the current Camera. If nullptr, the camera will draw on the whole screen.
 	void setViewPort(SDL_Rect* port);
