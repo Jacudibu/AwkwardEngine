@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../Engine/Scene.h"
-//#include "../Game.h"
 
 #include "RotatingComponent.h"
 #include "FPSTextUpdateComponent.h"
@@ -9,6 +8,7 @@
 #include "MouseComponent.h"
 #include "RotateToMouseCursorComponent.h"
 #include "PlaySoundOnButtonPressComponent.h"
+#include "ConstantRotationComponent.h"
 
 class TestingScene : public Scene
 {
@@ -33,6 +33,7 @@ public:
 		soundObject->addComponent(new PlaySoundOnButtonPressComponent());
 
 		mouseObject->addComponent(new SpriteRenderer("resources/cursor.png", renderLayer, 1, 2, 1));
+		mouseObject->addComponent(new ConstantRotationComponent());
 		mouseObject->addComponent(new MouseComponent(cam));
 
 		awkwardLogoObject->transform->Position = { (float)config->getScreenWidth() / 2, (float)config->getScreenHeight() / 2, 0 };

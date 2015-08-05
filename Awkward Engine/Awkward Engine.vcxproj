@@ -50,6 +50,7 @@
     <ClInclude Include="Code\Engine\Renderer\TextRenderer.h" />
     <ClInclude Include="Code\Engine\Renderer\Texture.h" />
     <ClInclude Include="Code\Engine\Renderer\Window.h" />
+    <ClInclude Include="Code\Testing\ConstantRotationComponent.h" />
     <ClInclude Include="Code\Testing\FPSTextUpdateComponent.h" />
     <ClInclude Include="Code\Testing\MouseComponent.h" />
     <ClInclude Include="Code\Testing\MoveCameraComponent.h" />
