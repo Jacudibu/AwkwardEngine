@@ -10,6 +10,8 @@ class GameObject;
 class Component
 {
 public:
+	virtual ~Component() { printf("%s deleted!\n", ID.c_str()); };
+
 	// If false, the component will skip all its update functions.
 	bool enabled = true;
 

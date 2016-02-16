@@ -5,6 +5,8 @@ TTF_Font* TextRenderer::font = nullptr;
 
 TextRenderer::TextRenderer(std::string newText, RenderLayer* layer, SDL_Color color)
 {
+	__super::ID = ID;
+
 	Layer = layer;
 	Layer->addRenderer(this);
 	Color = color;

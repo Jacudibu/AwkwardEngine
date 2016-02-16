@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <time.h>
 #include "Time.h"
 
 float Time::_time = 0.0f;
@@ -34,4 +35,9 @@ void Time::Update()
 		_fps = _frameCount;
 		_frameCount = 0;
 	}
+}
+
+long Time::getWindowsTime()
+{
+	return (long) time;
 }

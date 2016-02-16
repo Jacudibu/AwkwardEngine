@@ -34,3 +34,4 @@ void Scene::removeGameObject(GameObject* object)
 {
 	objectList.remove(object);
 }
+

@@ -31,6 +31,8 @@ namespace Input
 			if (e.key.repeat != 0)
 				return;
 
+			// printf("pressed key: %i\n", e.key.keysym.scancode);
+
 			keyStates[e.key.keysym.scancode].KeyDown = true;
 			keyStates[e.key.keysym.scancode].Key = true;
 			keyDownRemovals.push_front(e.key.keysym.scancode);

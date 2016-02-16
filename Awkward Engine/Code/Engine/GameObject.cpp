@@ -43,6 +43,15 @@ void GameObject::removeComponent(Component* comp)
 	comp->gameObject = nullptr;
 }
 
+void GameObject::removeAllComponents()
+{
+	for (Component* comp : components)
+	{
+		components.remove(comp);
+		delete comp;
+	}
+}
+
 void GameObject::Update()
 {
 	if (!enabled)

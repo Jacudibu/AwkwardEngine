@@ -1,7 +1,8 @@
 #pragma once
 
 #include <SDL.h>
-#include "../Transform.h"
+#include "../GameObject.h"
+//#include "../Transform.h"
 #include "RenderLayer.h"
 #include "Window.h"
 

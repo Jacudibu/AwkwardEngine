@@ -24,7 +24,7 @@
 #include "Engine/Audio/Music.h"
 #include "Engine/Audio/Sound.h"
 
-#include "Testing/TestingScene.h"
+#include "RyosMK/GameScene.h"
 
 Window*  gWindow = nullptr;
 TTF_Font* gFont = nullptr;
@@ -86,7 +86,7 @@ bool init()
 	gWindow = new Window(config->getScreenWidth(),
 						 config->getScreenHeight(),
 						 "Awkward Engine Version " + config->query("version"),
-						 SDL_RENDERER_ACCELERATED );//| SDL_RENDERER_PRESENTVSYNC/**/);
+						 SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC/**/);
 
 	cam = new Camera(gWindow, nullptr);
 	renderLayer = new RenderLayer();
@@ -136,6 +136,8 @@ void close()
 	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
+
+	Sleep(1000);
 }
 
 void handleEvents()

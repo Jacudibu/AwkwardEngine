@@ -35,6 +35,9 @@ public:
 	// Sets the current timeScale. Affects time, lastTime and deltaTime. Use unscaledTime for unaffected values.
 	static void setTimeScale(float scale) { _timeScale = scale; }
 
+	// Returns the current Windows Time as unsinged long.
+	static long getWindowsTime();
+
 private:
 	static float _time;
 	static float _lastTime;

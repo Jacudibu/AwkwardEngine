@@ -12,7 +12,7 @@ class Scene
 public:
 	Scene() {}
 	Scene(Camera* cameras, Config* configs, RenderLayer* layer);
-	~Scene();
+	virtual ~Scene();
 
 	// Get called inside the Constructor.
 	// Use this instead of a Constructor.

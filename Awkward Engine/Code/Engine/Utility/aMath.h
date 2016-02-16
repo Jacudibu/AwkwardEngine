@@ -8,6 +8,7 @@ namespace aMath
 	// Clamp
 	// Returns value while min < value < max, elsewise min or max.
 	float clamp(float value, float min, float max);
+	int clamp(int value, int min, int max);
 
 	// --- Interpolations ---
 
