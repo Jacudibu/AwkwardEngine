@@ -13,7 +13,7 @@ public:
 	Window(int width, int height, std::string title, Uint32 SDL_RENDERER_FLAGS_GOOGLE_IT);
 	~Window();
 
-	SDL_Renderer* renderer;
+	SDL_Renderer* renderer = nullptr;
 
 	int ScreenWidth;
 	int ScreenHeight;
@@ -29,6 +29,6 @@ public:
 	void removeCamera(Camera* cam);
 
 private:
-	SDL_Window* window;
+	SDL_Window* window = nullptr;
 	std::list<Camera*> cameraList;
 };

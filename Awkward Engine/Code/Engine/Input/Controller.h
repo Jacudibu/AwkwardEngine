@@ -8,8 +8,8 @@
 struct Controller
 {
 	// Members
-	SDL_GameController* controller;
-	SDL_Haptic* haptic;
+	SDL_GameController* controller = nullptr;
+	SDL_Haptic* haptic = nullptr;
 	KeyState buttonStates[SDL_CONTROLLER_BUTTON_MAX];
 
 	// Functions

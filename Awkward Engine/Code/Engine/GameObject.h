@@ -13,7 +13,7 @@ public:
 	std::hash<std::string> componentHash;
 
 	bool enabled = true;
-	Transform* transform;
+	Transform* transform = nullptr;
 
 	GameObject();
 	virtual ~GameObject();

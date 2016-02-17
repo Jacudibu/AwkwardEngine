@@ -12,8 +12,8 @@ class RenderLayer
 public:
 	bool enabled = true;
 	int layer;
-	SDL_Renderer* renderer;
-	Camera* camera;
+	SDL_Renderer* renderer = nullptr;
+	Camera* camera = nullptr;
 
 	// Sends a draw()-Command to all Renderer inside the renderList.
 	void Render();

@@ -16,7 +16,7 @@ public:
 	bool enabled = true;
 
 	// A reference to the gameObject the Component is attached to.
-	GameObject* gameObject;
+	GameObject* gameObject = nullptr;
 
 	// "Update is called once per Frame." [Obviously not a Unity Quote]
 	virtual void Update() = 0;

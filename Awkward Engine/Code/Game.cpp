@@ -24,7 +24,7 @@
 #include "Engine/Audio/Music.h"
 #include "Engine/Audio/Sound.h"
 
-#include "RyosMK/GameScene.h"
+#include "Testing/TestingScene.h"
 
 Window*  gWindow = nullptr;
 TTF_Font* gFont = nullptr;
@@ -137,7 +137,7 @@ void close()
 	IMG_Quit();
 	SDL_Quit();
 
-	Sleep(1000);
+	//Sleep(1000);
 }
 
 void handleEvents()

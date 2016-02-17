@@ -26,5 +26,5 @@ public:
 
 
 protected:
-	RenderLayer* Layer;
+	RenderLayer* Layer = nullptr;
 };

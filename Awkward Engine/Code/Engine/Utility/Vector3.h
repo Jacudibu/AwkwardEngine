@@ -5,9 +5,9 @@ struct Vector3
 	Vector3();
 	Vector3(float _x, float _y, float _z);
 
-	float x;
-	float y;
-	float z;
+	float x = 0.0f;
+	float y = 0.0f;
+	float z = 0.0f;
 
 	// Returns a normalized version of the Vector with a magnitude of 1.
 	Vector3 Vector3::Normalized();

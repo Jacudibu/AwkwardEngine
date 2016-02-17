@@ -31,7 +31,7 @@ public:
 	void setWindow(Window* win);
 
 private:
-	SDL_Rect* viewPort;
+	SDL_Rect* viewPort = nullptr;
 	std::list<RenderLayer*> renderLayer;
-	Window* window;
+	Window* window = nullptr;
 };

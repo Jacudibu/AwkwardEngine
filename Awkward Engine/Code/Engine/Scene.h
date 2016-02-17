@@ -36,7 +36,7 @@ public:
 protected:
 	std::list<GameObject*> objectList;
 
-	Camera* cam;
-	RenderLayer* renderLayer;
-	Config* config;
+	Camera* cam = nullptr;
+	RenderLayer* renderLayer = nullptr;
+	Config* config = nullptr;
 };

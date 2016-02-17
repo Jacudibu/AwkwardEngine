@@ -35,6 +35,6 @@ private:
 	// Used to compare components for similiarity.
 	std::string ID = "Sound"; 
 	
-	Mix_Chunk* sound;
+	Mix_Chunk* sound = nullptr;
 	std::string path;
 };

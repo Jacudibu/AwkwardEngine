@@ -29,9 +29,9 @@ private:
 	int clipWidth;
 	int clipHeight;
 
-	SDL_Rect* spriteClips;
+	SDL_Rect* spriteClips = nullptr;
 
-	Texture* texture;
+	Texture* texture = nullptr;
 
 	void calculateSpriteClips();
 };

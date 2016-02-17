@@ -26,8 +26,8 @@ private:
 	// Used to compare components for similiarity.
 	std::string ID = "TextRenderer";
 
-	Texture* texture;
-	std::string text;
+	Texture* texture = nullptr;
+	std::string text = "";
 
 	void generate();
 };

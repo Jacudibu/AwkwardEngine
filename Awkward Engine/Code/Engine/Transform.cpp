@@ -51,7 +51,7 @@ Transform* Transform::getWorldTransform()
 {
 	Transform* trans = this;
 
-	Transform* result = trans;
+	Transform* result = new Transform(*trans);
 
 	while (trans->parent != nullptr)
 	{

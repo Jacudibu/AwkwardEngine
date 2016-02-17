@@ -11,9 +11,9 @@ class GameObject;
 class Transform
 {
 public:
-	Vector3 Position;
-	float   Rotation;
-	Vector2 Scale;
+	Vector3 Position = Vector3();
+	float   Rotation = 0.0f;
+	Vector2 Scale = Vector2();
 
 	Transform(GameObject* object);
 	~Transform();
@@ -52,6 +52,6 @@ private:
 	std::list<Transform*> children;
 
 	// The parent of the Transform.
-	Transform* parent;
-	GameObject* gameObject;
+	Transform* parent = nullptr;
+	GameObject* gameObject = nullptr;
 };

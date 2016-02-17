@@ -9,7 +9,7 @@
 class FPSTextUpdateComponent : public Component
 {
 public:
-	TextRenderer* fpsRenderer;
+	TextRenderer* fpsRenderer = nullptr;
 
 	// Variables for FPS
 	std::stringstream timeText;

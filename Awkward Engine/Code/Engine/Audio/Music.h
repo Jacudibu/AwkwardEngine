@@ -56,6 +56,6 @@ private:
 	// Used to compare components for similiarity.
 	std::string ID = "Music";
 
-	Mix_Music* music;
+	Mix_Music* music = nullptr;
 	std::string path;
 };

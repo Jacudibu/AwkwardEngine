@@ -7,8 +7,8 @@ struct Vector2
 	Vector2();
 	Vector2(float _x, float _y);
 
-	float x;
-	float y;
+	float x = 0.0f;
+	float y = 0.0f;
 
 	// Returns a normalized version of the Vector with a magnitude of 1.
 	Vector2 Normalized();
